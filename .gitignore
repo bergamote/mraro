@@ -1,0 +1,15 @@
+# Files to exclude
+
+content/*
+
+mra/mra.conf
+mra/menu.conf
+
+mra/tmp/*
+
+uploads/*
+!uploads/img
+uploads/img/*
+!uploads/img/error.png
+
+

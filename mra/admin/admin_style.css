@@ -1,0 +1,211 @@
+/* MRA admin stylsheet */
+
+* { box-sizing: border-box }
+
+body {
+  overflow-y:scroll;
+}
+
+#menu_maker {
+/*  */
+position:relative;
+}
+#menu_buttons {
+  display:none;
+  position:absolute;
+  background:#EEDD82;
+  width:100%;
+  text-align:center;
+}
+#menu_buttons button {
+  font-family: sans;
+}
+
+#main-list {
+  width:17em;
+  float:left;
+  font-family: sans-serif;
+  margin: 1em 0 0 -18em;
+  padding: 0.5em;
+  background:#c7c7c7;
+}
+
+#main-list ul,
+#main-list li {
+  list-style: none;
+}
+#main-list ul {
+  padding: 0.2em 0.2em 0.2em 0;
+}
+#main-list > ul {
+  padding: 0;
+}
+#main-list li {
+  padding: 0.2em 0.2em 0.2em 0.4em;
+  /*border: 0.1em black solid;
+  border-right: 0; */
+}
+
+#main-list > ul > li:first-child {
+  margin-top:0;
+}
+
+li.page {
+ /* background: #e2e2e2;  
+  box-shadow: 0 0 0.5em #555;  */ 
+}
+
+li.category {
+  background: #bbb;
+  /*box-shadow: inset 0 0 1em #555;*/
+}
+
+#main-list li.new {
+  background: #A8A8A8;
+  opacity: 0.62;
+  padding: 0.1em 0.1em 0.1em 0.6em;
+}
+
+input.right_side {
+ /* float: right;*/
+  margin: 0 0.6em 0 0.6em;
+}
+
+/*form#page-edit*/
+#page-edit,
+#page-settings {
+  margin-top: 1em;
+  padding:0.5em;
+  background:#e0e0e0;
+}
+
+#wmd-input{
+  margin-bottom:0.6em;
+}
+
+.mra_button {
+  background:#969696;
+  color:#e2e2e2;
+  border-radius:0.2em;
+  cursor:pointer;
+  margin:0;
+  padding:0.2em 0.4em;
+  font-size:0.8em;
+  text-decoration:none;
+}
+.mra_button:hover {
+  background:#323232 ;
+}
+
+
+/* CSS for nativesortable */
+.sortable {
+  cursor: pointer;
+  -moz-user-select: none; 
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.sortable * {
+  -moz-user-drag: none; 
+  -khtml-user-drag: none; 
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+.sortable li.sortable-dragging{ 
+   opacity: .25;
+   transition: all 0.2s;    
+}
+.sortable li.sortable-over {
+   opacity: .25;
+}
+
+/* CSS for showdown */
+.wmd-button-bar 
+{
+	width: 100%;
+	background-color: Silver; 
+}
+.wmd-input 
+{ 
+	height: 300px;
+	width: 100%;
+	background-color: Gainsboro;
+	border: 1px solid DarkGray;
+	color:#000
+}
+.wmd-button-row 
+{
+	position: relative; 
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-top: 10px;
+	padding: 0px;  
+	height: 20px;
+}
+.wmd-spacer
+{
+	width: 1px; 
+	height: 20px; 
+	margin-left: 14px;
+	
+	position: absolute;
+	background-color: Silver;
+	display: inline-block; 
+	list-style: none;
+}
+.wmd-button {
+    width: 20px;
+    height: 20px;
+    padding-left: 2px;
+    padding-right: 3px;
+    position: absolute;
+    display: inline-block;
+    list-style: none;
+    cursor: pointer;
+}
+.wmd-button > span {
+    background-image: url('wmd-buttons.png');
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;    border-radius: 2px;
+}
+.wmd-spacer1
+{
+    left: 50px;
+}
+.wmd-spacer2
+{
+    left: 175px;
+}
+.wmd-spacer3
+{
+    left: 300px;
+}
+.wmd-prompt-background
+{
+	background-color: Black;
+}
+.wmd-prompt-dialog
+{
+	border: 1px solid #999999;
+	background-color: #F5F5F5;
+}
+.wmd-prompt-dialog > div {
+	font-size: 0.8em;
+	font-family: arial, helvetica, sans-serif;
+}
+.wmd-prompt-dialog > form > input[type="text"] {
+	border: 1px solid #999999;
+	color: black;
+}
+.wmd-prompt-dialog > form > input[type="button"]{
+	border: 1px solid #888888;
+	font-family: trebuchet MS, helvetica, sans-serif;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
