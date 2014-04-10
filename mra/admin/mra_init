@@ -1,11 +1,11 @@
 #!/bin/bash
 
 cd ../../
-if [ -d contents ]
+if [ -d content ]
   then echo "Content folder already exists."
   else 
-    mkdir contents && echo "content directory created"
-    cp mra/admin/init/*.md contents/ && echo "copied init content files"
+    mkdir content && echo "content directory created"
+    cp mra/admin/init/*.md content/ && echo "copied init content files"
     cp mra/admin/init/*.conf mra/ && echo "copied init setting files"
     mkdir mra/tmp && echo "created cache directory"
 fi
