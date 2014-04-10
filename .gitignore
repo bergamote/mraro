@@ -12,4 +12,6 @@ uploads/*
 uploads/img/*
 !uploads/img/error.png
 
-
+mra/theme/*
+!mra/theme/index.php
+!mra/theme/default

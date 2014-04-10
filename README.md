@@ -17,10 +17,12 @@ mraro (or mra for cool cats) is a CMS written in PHP. It uses (and comes with):
 
 ###Install
 
-To install, go to the folder **mra/admin** and run:
+To install, navigate to your chosen folder and clone the repo:
 
-    ./mra_init
-from the command line (making sure the file is executable).
+    cd /www/mysite
+    git clone https://github.com/bergamote/mraro.git .
+
+Then go to the folder **mra/admin** and run:
 
 This will create:
 
