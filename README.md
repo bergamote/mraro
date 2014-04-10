@@ -1,4 +1,3 @@
-title = Home
 
 #  mraro
 
@@ -28,4 +27,5 @@ This will create:
 - the *content* folder with a couple of example pages
 - the settings files (*mra.conf* and *menu.conf*)
 - an empty cache directory (*mra/tmp*)
-  
+
+

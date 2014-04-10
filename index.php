@@ -1,5 +1,5 @@
 <?php
-#mra2 - http://mrarrow.co.uk
+# mraro 
 include('mra/functions.php');
 
 define("BASE", getcwd());
