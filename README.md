@@ -15,14 +15,17 @@ mraro (or mra for cool cats) is a CMS written in PHP. It uses (and comes with):
   [3]: https://code.google.com/p/pagedown/
   [4]: https://github.com/bgrins/nativesortable
 
-###Install
+### Install
 
-To install, navigate to your chosen folder and clone the repo:
+To install, pick a folder on your server and clone the repo:
 
-    cd /www/mysite
+    cd /www/mysite-folder
     git clone https://github.com/bergamote/mraro.git .
 
-Then go to the folder **mra/admin** and run:
+Then go to the folder **mra/admin** and run the init script:
+
+    cd mra/admin
+    ./mra_init
 
 This will create:
 
@@ -30,4 +33,6 @@ This will create:
 - the settings files (*mra.conf* and *menu.conf*)
 - an empty cache directory (*mra/tmp*)
 
+Finaly, make sure that the server's PHP has permission to write in *content* and *mra/tmp*.
 
+mraro and it's dependencies are released under [the MIT License][http://opensource.org/licenses/MIT].
