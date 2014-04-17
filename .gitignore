@@ -15,3 +15,9 @@ uploads/img/*
 mra/theme/*
 !mra/theme/index.php
 !mra/theme/default
+
+# favicons
+favicon.ico
+apple-touch-icon-precomposed.png
+apple-touch-icon.png
+

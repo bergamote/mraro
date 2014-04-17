@@ -37,8 +37,8 @@ $mra = parseConf('../mra.conf', true);
   <script type="text/javascript" src="../lib/Markdown.Editor.js"></script>
   <script type="text/javascript" src="admin.js"></script>
   </head>
-<body onload="startSort()">
-
+<body onload="startSort()"<?= mra('class',' class="','"')?>>
+<div id="page">
 <header id="mra_header">
 <?= mra('site_title') ?>
 </header>
@@ -64,7 +64,7 @@ $dirArray = dirToArray(CONTENT);
 runArray($dirArray);
 ?>
 </div>
-
+<article>
 <div id="main-frame">
 <?php
 if(isset($current_page)) {
@@ -74,10 +74,8 @@ if(isset($current_page)) {
  }
 ?>
 </div>
+</article>
+</div> <!-- close page -->
 
-<footer id="mra_footer">
-<a href="../../">logout</a><br>
-mra
-</footer>
 </body>
 
