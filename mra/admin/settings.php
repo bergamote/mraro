@@ -1,3 +1,4 @@
+<?php require('session.php'); ?>
 <div id="page-settings">
 <h3>Settings</h3>
 <?php 

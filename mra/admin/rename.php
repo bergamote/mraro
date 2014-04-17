@@ -1,5 +1,5 @@
 <?php
-
+require('session.php');
 #Rename the file or folder
 $old_path = urldecode($_GET['old_path']);
 $new_title = urldecode($_GET['new_title']);

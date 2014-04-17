@@ -1,5 +1,6 @@
 <?php
 # mra2 - Administrator functions
+require('session.php');
 include('../functions.php');
 
 

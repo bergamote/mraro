@@ -58,7 +58,7 @@ $mra = parseConf('../mra.conf', true);
 
 <div id="main-list">
 <a href="./" class="mra_button">Settings</a> 
-<a href="../../" class="mra_button">Log out</a>
+<a href="session.php?eject=true" class="mra_button">Log out</a>
 <?php
 $dirArray = dirToArray(CONTENT);
 runArray($dirArray);
