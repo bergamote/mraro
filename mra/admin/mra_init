@@ -4,8 +4,10 @@ cd ../../
 if [ -d content ]
   then echo "Content folder already exists."
   else 
-    mkdir content && echo "content directory created"
-    cp mra/admin/init/*.md content/ && echo "copied init content files"
-    cp mra/admin/init/*.conf mra/ && echo "copied init setting files"
-    mkdir mra/tmp && echo "created cache directory"
+    mkdir content && echo "create content directory"
+    cp mra/admin/init/*.md content/ && echo "copy init content files"
+    cp mra/admin/init/*.conf mra/ && echo "copy init setting files"
+    cp mra/admin/init/.creds mra/ && echo "copy credential file"
+    mkdir mra/tmp && echo "create cache directory"
+    
 fi

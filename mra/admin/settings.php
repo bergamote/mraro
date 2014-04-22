@@ -1,6 +1,7 @@
 <?php require('session.php'); ?>
 <div id="page-settings">
-<h3>Settings</h3>
+<b>Settings</b> <i class="small">(edit in mra.conf)</i>
+<br><br>
 <?php 
 if($_GET['action'] == 'clear-cache') {
   clearcache();
@@ -15,12 +16,13 @@ foreach ($mra as $key => $value) {
 } 
 
 function regular_setting($key,$value) {
-  echo ''.$key.' = <input name="'.$key.'" type="text" value="';
-  echo $value.'"><br>';
+  //echo ''.$key.' = <input name="'.$key.'" type="text" value="';
+  //echo $value.'"><br>';
+  echo $key.' = '.$value.'<br>';
 }
 function home_setting($mra) {
+  echo 'theme = ';
   ?>
-  Selected Theme:
   <select id="theme-list">
     <option value="">none</option>
   <?php
@@ -34,7 +36,7 @@ function home_setting($mra) {
 }
 ?>  
     
-  </select><br><br>
+  </select><br>
   <?php
 }
 ?>
