@@ -32,8 +32,9 @@ include('feedback.php');
 ?>
 <html>
 <head>
-<title> MRARO - login</title>
+<title> mrAro - Login</title>
 <link rel="stylesheet" href="admin_style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="mra_login">
 
@@ -44,11 +45,11 @@ include('feedback.php');
 <form action="./index.php" method="POST">
 Username <input type="text" name="userfield" value="" size="13"><br>
 Password <input type="password" name="passfield" value="" size="13"><br><br>
-<input type="submit" name="submit" value="Log in" class="mra_button">
+<input type="submit" name="submit" value="Login" class="mra_button">
 </form>
 </div>
 
-<a href="../../" class="small link">&larr;home</a>
+<a href="../../" class="small link">&larr;Home</a>
 </body>
 <?php
 exit;
