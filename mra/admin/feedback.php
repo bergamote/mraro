@@ -1,6 +1,6 @@
 <?php
 
-function feedback($msg, $type = false) {
+function feedback($msg = false, $type = false) {
   $feed = '';
   if($msg) {
     $feed .= '<div class="mra_feedback';

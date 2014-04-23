@@ -2,6 +2,10 @@
 define("CONTENT", '../../content/');
 include('admin_functions.php');
 
+include_once('feedback.php');
+$msg = false;
+$msg_type = false;
+
 $path = isset($current_page)?$current_page:urldecode($_GET['page']);
 
 $site_conf = parseConf('../mra.conf',true);
@@ -16,7 +20,13 @@ if ($_GET['action'] == 'save') {
     $top .= $k.' = '.$v.PHP_EOL;
   }
   $whole = trim($top).PHP_EOL.PHP_EOL.$content;
-  file_put_contents(CONTENT.$path, $whole);
+  if(file_put_contents(CONTENT.$path, $whole)) {
+    $msg = "File saved";
+    $msg_type = 'success';
+  } else {
+    $msg = "Error! File not saved";
+    $msg_type = 'error';
+  }
 }
 $change_time = filemtime(CONTENT.$path);
 
@@ -24,10 +34,9 @@ $mra = array_merge($site_conf,$page_conf);
 ?>
 
 <form id="page-edit" action="<?= $_SERVER['PHP_SELF'].'?page='.urlencode($path) ?>" method="post">
-
+<?= feedback($msg,$msg_type); ?>
 <input type="text" name="title" id="title_field" value="<?= mra('title')?>"> 
 <span class="mra_button" onclick="renameLink('<?=$path?>')" >Rename</span>
-
 
 <div class="wmd-panel">
   <div id="wmd-button-bar"></div>
@@ -39,7 +48,7 @@ $mra = array_merge($site_conf,$page_conf);
 Save</span>
  <a  class="mra_button" href="../../?q=<?=urlencode($path)?>">View</a> 
  <a  class="mra_button" href="./">Cancel</a> - 
-<i>last change: <?= date('D j/m/y \a\t h:i a', $change_time) ?></i>
+<i class="small">last saved: <?= date('D j/m/y \a\t h:i a', $change_time) ?></i>
 </form>
 <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
 <?php

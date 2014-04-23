@@ -8,8 +8,9 @@ $new_path = sane($new_title).".md";
 
 
 if(!is_file(CONTENT.$old_path)){
-  echo CONTENT.$old_path." doesn't exist";
-  exit;
+  $msg =  'Error! '.CONTENT.$old_path." doesn't exist";
+  $msg_type = 'error';
+  break;
 }
 
 #Change file Title
