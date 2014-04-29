@@ -52,8 +52,8 @@ Then in **mra/mra.conf**, edit the _theme_ line replacing _default_ by the name 
 **mrAro** comes packaged with the following programs:
 
 - The [PHP port][2] of [Markdown][1]
-- [pagedown][3]
-- [nativesortable][4]
+- [pagedown][3] (minified)
+- [nativesortable][4] (minified)
     
 
   [1]: http://daringfireball.net/projects/markdown/

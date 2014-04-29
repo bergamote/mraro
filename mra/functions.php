@@ -1,5 +1,20 @@
 <?php
 
+function cache_path($home=false) { //create cache path
+  $path = $_GET['q'];
+  if($home){$path = $home;}
+  $mod_time = filemtime(CONTENT.$path);
+  $path = str_replace('/','-',$path);
+  return CACHE.$path.$mod_time.".html";  
+}
+
+function cache_output( $buffer ) {
+    file_put_contents( cache_path(), $buffer );
+    chmod(cache_path(), 0664);
+    return $buffer;
+    exit;
+}
+
 function splitConf($str) {
 # Separate configuration header from content
 # returns (parsed header [false if none], content)

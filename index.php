@@ -1,6 +1,6 @@
 <?php
 # mraro 
-include('mra/functions.php');
+require_once('mra/functions.php');
 
 define("BASE", getcwd());
 define("CONTENT", BASE."/content/");
@@ -15,13 +15,6 @@ define("THEME", THEME_DIR.mra('theme','','/'));
 
 $mra['theme_dir'] = "mra/theme/".mra('theme','','/');
 
-function cache_path($home=false) { //create cache path
-  $path = $_GET['q'];
-  if($home){$path = $home;}
-  $mod_time = filemtime(CONTENT.$path);
-  $path = str_replace('/','-',$path);
-  return CACHE.$path.$mod_time.".html";  
-}
 
 if(!empty($_GET['q']))  { // View Page
   $full_path = CONTENT.$_GET['q'];
@@ -61,13 +54,6 @@ if(!empty($_GET['q']))  { // View Page
   chmod($home_cache, 0664);
   return $buffer;
   exit;
-}
-
-function cache_output( $buffer ) {
-    file_put_contents( cache_path(), $buffer );
-    chmod(cache_path(), 0664);
-    return $buffer;
-    exit;
 }
 
 ob_start( 'cache_output' ); //start caching
