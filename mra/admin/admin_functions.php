@@ -16,10 +16,6 @@ function encodeConf( $conf, $file = false) {
   }
 }
 
-function clearcache(){
- $cmd = `rm ../tmp/*`;
-}
-
 # Go through a folder recursively and put 
 # the structure in an array
 function dirToArray($dir) {

@@ -3,10 +3,6 @@
 <b>Settings</b> <i class="small">(edit in mra.conf)</i>
 <br><br>
 <?php 
-if($_GET['action'] == 'clear-cache') {
-  clearcache();
-}
-
 foreach ($mra as $key => $value) {
   if ($key == 'theme'){
     home_setting($mra);
@@ -14,7 +10,6 @@ foreach ($mra as $key => $value) {
     regular_setting($key,$value);
   }
 } 
-
 function regular_setting($key,$value) {
   //echo ''.$key.' = <input name="'.$key.'" type="text" value="';
   //echo $value.'"><br>';
