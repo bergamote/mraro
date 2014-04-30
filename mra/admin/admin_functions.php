@@ -15,6 +15,9 @@ function encodeConf( $conf, $file = false) {
     return $str.PHP_EOL;
   }
 }
+function clearcache() {
+  $cmd = `rm ../tmp/*`; 
+}
 
 # Go through a folder recursively and put 
 # the structure in an array

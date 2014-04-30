@@ -107,7 +107,7 @@ if($_GET['action'] == 'rename') {      //--------------- Rename item
     }
   }
 } elseif($_GET['action'] == 'clear-cache') {
-  $cmd = `rm ../tmp/*`;
+  clearcache();
   $msg = "Cache cleared";
   $msg_type = 'success';
   return false;   
