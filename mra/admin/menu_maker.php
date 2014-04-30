@@ -1,8 +1,9 @@
 <?php
-include_once('admin_functions.php');
+require_once('admin_functions.php');
 
 $old_menu = parseConf('../menu.conf', true);
-  
+
+
 if(isset($_GET['menu'])) {
   $order_menu = $_GET['menu'];
   $new_menu = array();
@@ -21,23 +22,18 @@ elseif(isset($_GET['edit'])) {
   if(array_key_exists($path,$old_menu)){
     $new_menu = $old_menu;
     unset($new_menu[$path]);
-    encodeConf($new_menu, '../menu.conf');
-    clearcache();
   } else {
     $new_menu = $old_menu;
     $new_menu[$path] = $title;
-    encodeConf($new_menu, '../menu.conf');
-    clearcache();
   }
+  encodeConf($new_menu, '../menu.conf');
+  clearcache();
 }
-
-
 
 ?>
 <nav id="mra_menu" ondragleave="btnVis()">
 <ul id="sort_menu" class="sortable">
 <?php
-# Make the menu from mra/menu.conf
 $menu_array = parseConf('../menu.conf', true);
 foreach ($menu_array as $name) {
   echo '<li>'.$name.'</li>'.PHP_EOL;
@@ -45,4 +41,3 @@ foreach ($menu_array as $name) {
 ?>
 </ul>
 </nav>
-

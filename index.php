@@ -17,12 +17,12 @@ $mra['theme_dir'] = "mra/theme/".mra('theme','','/');
 
 
 if(!empty($_GET['q']))  { // View Page
-  $full_path = CONTENT.$_GET['q'];
+  $full_path = CONTENT.urldecode($_GET['q']);
   if(is_file(cache_path())){
     readfile( cache_path() );
     exit;
   }
-  include('mra/lib/markdown.php');
+  require_once('mra/lib/markdown.php');
   $file = munch($full_path, $mra);
   $content = $file[0];
   $mra = $file[1];
@@ -42,13 +42,13 @@ if(!empty($_GET['q']))  { // View Page
     exit;
   } 
   $home_cache = cache_path($mra['home_page']); 
-  include('mra/lib/markdown.php'); 
+  require_once('mra/lib/markdown.php'); 
   $file = munch(CONTENT.$mra['home_page'], $mra); // Homepage
   $content = $file[0];
   $mra = $file[1]; 
   ob_start(); //start caching
   
-  include(THEME.'index.php');
+  require_once(THEME.'index.php');
   $buffer = ob_get_flush();
   file_put_contents( $home_cache, $buffer );
   chmod($home_cache, 0664);

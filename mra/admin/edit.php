@@ -1,8 +1,8 @@
 <?php
 define("CONTENT", '../../content/');
-include('admin_functions.php');
+require_once('admin_functions.php');
 
-include_once('feedback.php');
+require_once('feedback.php');
 $msg = false;
 $msg_type = false;
 
@@ -46,7 +46,7 @@ $mra = array_merge($site_conf,$page_conf);
 </div>
 <span class="mra_button" onclick="ajaxEdit('save','<?= urlencode($path) ?>');">
 Save</span>
- <a  class="mra_button" href="../../?q=<?=urlencode($path)?>">View</a> 
+ <a  class="mra_button" href="../../?q=<?=urlencode($path)?>" target="_blank">View</a> 
  <a  class="mra_button" href="./">Cancel</a> - 
 <i class="small">last saved: <?= date('D j/m/y \a\t h:i a', $change_time) ?></i>
 </form>

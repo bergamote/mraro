@@ -26,6 +26,41 @@ function btnVis() {
   document.getElementById("menu_buttons").style.display="block";
 }
 
+function toggleNew(me, path){
+  hideNew();
+  var addNewLi = me.parentNode;
+  var addButton = '<div id="addNew_box">';
+  addButton += ' Type:<select id="new_select_type"> \
+  <option value="page">Page</option>\
+  <option value="category">Category</option>\
+  </select> Title:<input id="new_item_title" type="text">\
+  <span class="mra_small_button" onclick="hideNew();">Cancel</span>\
+  <span class="mra_button" onclick="newLink(\'';
+  addButton += path; 
+  addButton += '\')">Add new</span></div>' ; 
+  addNewLi.innerHTML += addButton;
+  addNewLi.firstChild.style.display = 'none';        
+}
+function hideNew() {
+  if(document.getElementById('addNew_box')) {
+    var newBox = document.getElementById('addNew_box');
+    var newLi = newBox.parentNode;
+    newLi.removeChild(newBox);
+    newLi.firstChild.style.display = 'inline'
+  }
+}
+function newLink(dir) {
+  var url = '?action=new&type=';
+  var e = document.getElementById('new_select_type');
+  var type =  e.options[e.selectedIndex].value;
+  url += type+'&dir=';  
+  url += encodeURIComponent(dir);
+  url += '&title=';  
+  var newtitle = document.getElementById("new_item_title").value;
+  url += encodeURIComponent(newtitle);
+
+  window.location.href = url;
+}
 function renameLink(oldpath) {
   var url = '?action=rename&old_path=';
   url += encodeURIComponent(oldpath);
@@ -34,6 +69,15 @@ function renameLink(oldpath) {
   url += encodeURIComponent(newtitle);
 
   window.location.href = url;
+}
+function deleteLink(path) {
+  var answer = window.confirm('Are you sure you want to do this?\
+  \n It will delete the page or category (and all its content) FOREVER\nProceed?');
+  if(answer) {
+  var url = '?action=delete&file=';
+  url += encodeURIComponent(path);
+  window.location.href = url;
+  }
 }
 function ajaxMenu(action,path,title) {
   action = action || false;

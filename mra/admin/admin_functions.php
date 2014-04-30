@@ -1,7 +1,7 @@
 <?php
 # mra2 - Administrator functions
-require('session.php');
-include('../functions.php');
+require_once('session.php');
+require_once('../functions.php');
 
 
 # Encode a configutation array into a string or a file
@@ -45,7 +45,7 @@ function runArray($theArray, $path = '') {
       listPage($v, $path) ;
     }
   }
-  # addNewPage($path);
+  addNewPage($path);
   echo '</ul>';
 }
 function validFiles($name) {
@@ -67,10 +67,11 @@ function listPage($name, $path) {
     $conf = parseConf($firstline);
     $title = empty($conf['title'])?'Untitled':$conf['title'];
     menuCheck($path, $title);
-    echo $title;#.' - '.$path;
+    echo $title;
     echo ' <span class="mra_button" onclick="'."ajaxEdit('edit','";
     echo urlencode($path).'\');">Edit</span> ';
-    #echo '<input name="home" type="radio" class="right_side">';
+    echo ' <span class="mra_small_button" onclick="'."deleteLink('";
+    echo urlencode($path).'\');">Delete</span> ';
     echo '</li>'.PHP_EOL;
   }
 }
@@ -81,23 +82,22 @@ function listCategory($name, $dir, $path) {
   $cat_conf = parseConf($conf, true);
   $title = empty($cat_conf['title'])?'Untitled':$cat_conf['title'];
   echo '<li class="category">';
-  menuCheck($path, $title);
-  echo $title;#.' - '.$path;
-  #echo '<input name="home" type="radio" class="right_side">';
-
+  //menuCheck($path, $title);
+  echo $title;
+  echo ' <span class="mra_small_button" onclick="'."deleteLink('";
+  echo urlencode($path).'\');">Delete</span> ';
   runArray($dir, $path);                
   echo '</li>'.PHP_EOL;
 }
 # Add New
 function addNewPage($path) {
-  echo '<li class="new">
-          new 
-          <select>
-            <option value="page">Page</option>
-            <option value="category">Category</option>
-          </select> titled <input type="text">
-          <button value="Add">Go</button>
-        </li>'; 
+  global $addNewBit;
+  echo '<li class="new" id="addNew_'.$addNewBit.'"
+    class="mra_buttons">';
+  echo '<span class="mra_button" 
+    onclick="toggleNew(this, \''.$path.'\')">
+        New</span></li>';
+  $addNewBit++;
 }
 
 # 'In menu' checkbox

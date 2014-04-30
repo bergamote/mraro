@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 $msg = false;
 $msg_type = false;
@@ -41,12 +39,12 @@ include('feedback.php');
 
 <div id="input">
 <img src="logo.png" alt="MR&uarr;RO">
-<?= feedback($msg,$msg_type); ?>
+
 <form action="./index.php" method="POST">
 Username <input type="text" name="userfield" value="" size="13"><br>
 Password <input type="password" name="passfield" value="" size="13"><br><br>
 <input type="submit" name="submit" value="Login" class="mra_button">
-</form>
+</form><?= feedback($msg,$msg_type); ?>
 </div>
 
 <a href="../../" class="small link">&larr;Home</a>

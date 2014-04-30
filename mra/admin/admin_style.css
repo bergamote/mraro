@@ -72,18 +72,18 @@ li.page {
 }
 
 li.category {
-  background: #bbb;
+  background: hsl(180,5%,80%);
+  border-radius:0.2em;
   /*box-shadow: inset 0 0 1em #555;*/
 }
 
-#main-list li.new {
-  background: #A8A8A8;
-  opacity: 0.62;
-  padding: 0.1em 0.1em 0.1em 0.6em;
+#main-list li.new div{
+  background: hsl(180,30%,70%);
+    border-radius:0.2em;
+    padding: 0.2em;
 }
 
 input.right_side {
- /* float: right;*/
   margin: 0 0.6em 0 0.6em;
 }
 
@@ -93,7 +93,7 @@ input.right_side {
   margin-bottom:0.6em;
 }
 
-.mra_button {
+.mra_button, .mra_small_button {
   background: hsl(180,10%,80%);
   color: hsl(180,10%,40%);
   border-radius:0.2em;
@@ -106,7 +106,14 @@ input.right_side {
 }
 .mra_button:hover {
   background: hsl(180,30%,60%);
-  /*color: hsl(180,10%,80%);*/
+}
+.mra_small_button {
+  font-size:0.6em;
+  background: transparent;
+  border:0; 
+}
+.mra_small_button:hover {
+  background: hsl(0,0%,60%);  
 }
 /* Login window */
 body.mra_login {
@@ -137,19 +144,24 @@ body.mra_login {
 }
 
 /* Mra messages, feedback to user */
-
+.mra_feedback_wrap {
+  position:relative;
+  width: 100%;
+  animation: msg_out 2s 2s 1 forwards;
+  -webkit-animation: msg_out 2s 2s 1 forwards; 
+}
 .mra_feedback {
   overflow: hidden;
-  width: 100%;
-  height: 1.5em;
-  margin: 0.2em 0;
-  padding-top: 0.2em;
+  position:absolute;
+  top: 0;
+  right: 0;
+  border: 1px hsl(0,0%,90%) solid;
   border-radius: 0.2em;
   text-align: center;
-  color: hsl(0,0%,20%);
+  padding: 0.2em 0.4em 0.2em 0.4em;
+  font-size: 0.8em;
+  color: hsl(0,0%,40%);
   background: #fff;
-  animation: msg_out 2s 1 forwards;
-  -webkit-animation: msg_out 2s 1 forwards;
 }
 .feed_error {
   background: hsl(0,70%,70%);
@@ -161,26 +173,16 @@ body.mra_login {
   background: hsl(50,60%,70%);
 }
 @keyframes msg_out {
- 70% {
-    height: 1.5em;
-    margin: 0.2em 0;
-    padding: 0.2em 0;
- }
- 100% {
-    height: 0em;
-    padding: 0;
-    margin: 0; }
+ from {
+    opacity: 1; }
+ to {
+    opacity: 0; }
 }
 @-webkit-keyframes msg_out {
- 70% {
-    height: 1.5em;
-    margin: 0.2em 0;
-    padding: 0.2em 0;
- }
- 100% {
-    height: 0em;
-    padding: 0;
-    margin: 0; }
+ from {
+    opacity: 1; }
+ to {
+    opacity: 0; }
 }
 
 /* CSS for nativesortable */

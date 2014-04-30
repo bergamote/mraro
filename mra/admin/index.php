@@ -7,8 +7,8 @@ define("UPLOADS", BASE."uploads/");
 define("IMAGES",UPLOADS.'img/');
 define("THEME_DIR", "../theme/");
 #include_once('../functions.php');
-include_once('admin_functions.php');
-include('feedback.php');
+require_once('admin_functions.php');
+require_once('feedback.php');
 
 if(!empty($_GET['i'])) { // Show image
   $i = IMAGES.$_GET['i'];
@@ -20,9 +20,9 @@ if(!empty($_GET['i'])) { // Show image
       header("Location: $error");
       die();
     }
-} elseif($_GET['action'] == 'rename'){
-  $current_page = include('rename.php');
-}
+} elseif(isset($_GET['action'])){
+  $current_page = require_once('file_manager.php');
+} 
 
 $mra = parseConf('../mra.conf', true);
 ?>
@@ -48,7 +48,7 @@ $mra = parseConf('../mra.conf', true);
 <div id="menu_maker">
   <div id="menu_wrap">
   <?php
-  include('menu_maker.php');
+  include_once('menu_maker.php');
   ?>
   </div>
   <div class="clear-fix"></div>
@@ -59,18 +59,20 @@ $mra = parseConf('../mra.conf', true);
 </div>
 
 <div id="main-list">
+
 <?= feedback($msg, $msg_type); ?>
+
 <a href="./" class="mra_button">Settings</a> 
 <a href="session.php?eject=true" class="mra_button">Log out</a>
 <?php
+$addNewBit = 1;
 $dirArray = dirToArray(CONTENT);
 runArray($dirArray);
 ?>
 </div>
 <article>
 <?php
-if(isset($current_page)) {
-
+if($current_page) {
  $cur_url = urlencode($current_page);
  echo "<script>ajaxEdit('edit','".$cur_url."');</script>";
 }?>
