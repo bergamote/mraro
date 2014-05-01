@@ -11,7 +11,12 @@ define("THEME_DIR", BASE."/mra/theme/");
 
 $mra = parseConf(BASE."/mra/mra.conf", true);
 
-define("THEME", THEME_DIR.mra('theme','','/'));
+if( (!empty($mra['theme'])) && (is_dir(THEME_DIR.$mra['theme'])) ) {
+  define("THEME", THEME_DIR.$mra['theme'].'/');
+} else {
+  define("THEME", THEME_DIR);
+}
+
 
 $mra['theme_dir'] = "mra/theme/".mra('theme','','/');
 
