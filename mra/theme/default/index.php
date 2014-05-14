@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= mra('title','',' | ').mra('site_title') ?></title>
   <link rel="stylesheet" type="text/css" href="<?= mra('theme_dir') ?>style.css" />     
-  
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+  <![endif]-->
 </head>
 
 <body>
