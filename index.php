@@ -23,8 +23,8 @@ $mra['theme_dir'] = "mra/theme/".mra('theme','','/');
 
 if(!empty($_GET['q']))  { // View Page
   $full_path = CONTENT.urldecode($_GET['q']);
-  if(is_file(cache_path())){
-    readfile( cache_path() );
+  if( empty($mra['nocache']) && is_file(cache_path()) ){
+    readfile( cache_path() ); // Load Cached Page
     exit;
   }
   require_once('mra/lib/markdown.php');
@@ -42,8 +42,8 @@ if(!empty($_GET['q']))  { // View Page
       die();
     }
 } else {
-  if(is_file(cache_path($mra['home_page']))){
-    readfile( cache_path($mra['home_page']) );
+  if(empty($mra['nocache']) && is_file(cache_path($mra['home_page']))){
+    readfile( cache_path($mra['home_page']) ); // Load Cached Home
     exit;
   } 
   $home_cache = cache_path($mra['home_page']); 
