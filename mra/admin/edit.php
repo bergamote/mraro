@@ -46,7 +46,7 @@ $mra = array_merge($site_conf,$page_conf);
 </div>
 <span class="mra_button" onclick="ajaxEdit('save','<?= urlencode($path) ?>');">
 Save</span>
- <a  class="mra_button" href="../../?q=<?=urlencode($path)?>" target="_blank">View</a> 
+ <a  class="mra_button" href="../../?q=<?=urlencode($path)?>" target="mra_view">View</a> 
  <a  class="mra_button" href="./">Cancel</a> - 
 <i class="small">last saved: <?= date('D j/m/y \a\t h:i a', $change_time) ?></i>
 </form>

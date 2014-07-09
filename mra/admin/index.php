@@ -62,6 +62,7 @@ $mra = parseConf('../mra.conf', true);
 
 <?= feedback($msg, $msg_type); ?>
 
+<a href="../../" target="mra_view" class="mra_button">View site</a> 
 <a href="./" class="mra_button">Settings</a> 
 <a href="session.php?eject=true" class="mra_button">Log out</a>
 <?php
