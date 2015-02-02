@@ -1,10 +1,10 @@
 /* mraro admin stylsheet */
 
 * { 
--webkit-box-sizing: border-box;
--moz-box-sizing: border-box;
--ms-box-sizing: border-box;
-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
@@ -30,6 +30,13 @@ body {
 }
 
 #main-list,
+#page-settings {
+  max-width: 600px;
+  text-align: left;
+  font-size: 12pt;
+}
+
+#main-list,
 #page-edit,
 #page-settings {
   margin: 1em auto 0 auto;
@@ -37,11 +44,9 @@ body {
   border-radius: 0.2em;
   background: hsl(180,10%,90%);
   padding: 1em 1em 1em 1em;
-}
-#main-list {
-  color: hsl(180,10%,40%);
+  color: hsl(180,10%,27%);
   font-family: sans-serif;
-  }  
+}  
 
 
 #main-list ul,
@@ -50,7 +55,6 @@ body {
 }
 #main-list ul {
   padding: 0.2em 0.2em 0.2em 0;
-
 }
 #main-list > ul {
   padding: 0;
@@ -58,33 +62,25 @@ body {
 }
 #main-list li {
   padding: 0.2em 0.2em 0.2em 0.4em;
-  /*border: 0.1em black solid;
-  border-right: 0; */
 }
 
 #main-list > ul > li:first-child {
   margin-top:0;
 }
 
-li.page {
- /* background: #e2e2e2;  
-  box-shadow: 0 0 0.5em #555;  */ 
-}
-
 li.category {
   background: hsl(180,5%,80%);
   border-radius:0.2em;
-  /*box-shadow: inset 0 0 1em #555;*/
 }
 
 #main-list li.new div{
   background: hsl(180,30%,70%);
-    border-radius:0.2em;
-    padding: 0.2em;
+  border-radius:0.2em;
+  padding: 0.2em;
 }
 
-input.right_side {
-  margin: 0 0.6em 0 0.6em;
+#main-list .page input {
+  margin: 0 0.4em 0 0;
 }
 
 /*form#page-edit*/
@@ -186,115 +182,7 @@ body.mra_login {
 }
 
 /* CSS for nativesortable */
-[draggable] {
-  cursor: pointer;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-[draggable] * {
-  -moz-user-drag: none;
-  -khtml-user-drag: none;
-  -webkit-user-drag: none;
-  -o-user-drag: none;
-  user-drag: none;
-}
-.sortable li.sortable-dragging{ 
-   opacity: .25;
-   transition: all 0.2s;    
-}
-.sortable li.sortable-over {
-   opacity: .25;
-}
+[draggable]{cursor:pointer;-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}[draggable] *{-moz-user-drag:none;-khtml-user-drag:none;-webkit-user-drag:none;-o-user-drag:none;user-drag:none}.sortable li.sortable-dragging{opacity:.25;transition:all .2s}.sortable li.sortable-over{opacity:.25}
 
 /* CSS for showdown */
-.wmd-button-bar 
-{
-	width: 100%;
-	background-color: Silver; 
-}
-.wmd-input 
-{ 
-	height: 300px;
-	width: 100%;
-	background-color: Gainsboro;
-	border: 1px solid DarkGray;
-	color:#000
-}
-.wmd-button-row 
-{
-	position: relative; 
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-	margin-top: 10px;
-	padding: 0px;  
-	height: 20px;
-}
-.wmd-spacer
-{
-	width: 1px; 
-	height: 20px; 
-	margin-left: 14px;
-	
-	position: absolute;
-	background-color: Silver;
-	display: inline-block; 
-	list-style: none;
-}
-.wmd-button {
-    width: 20px;
-    height: 20px;
-    padding-left: 2px;
-    padding-right: 3px;
-    position: absolute;
-    display: inline-block;
-    list-style: none;
-    cursor: pointer;
-}
-.wmd-button > span {
-    background-image: url('wmd-buttons.png');
-    background-repeat: no-repeat;
-    background-position: 0px 0px;
-    width: 20px;
-    height: 20px;
-    display: inline-block;    border-radius: 2px;
-}
-.wmd-spacer1
-{
-    left: 50px;
-}
-.wmd-spacer2
-{
-    left: 175px;
-}
-.wmd-spacer3
-{
-    left: 300px;
-}
-.wmd-prompt-background
-{
-	background-color: Black;
-}
-.wmd-prompt-dialog
-{
-	border: 1px solid #999999;
-	background-color: #F5F5F5;
-}
-.wmd-prompt-dialog > div {
-	font-size: 0.8em;
-	font-family: arial, helvetica, sans-serif;
-}
-.wmd-prompt-dialog > form > input[type="text"] {
-	border: 1px solid #999999;
-	color: black;
-}
-.wmd-prompt-dialog > form > input[type="button"]{
-	border: 1px solid #888888;
-	font-family: trebuchet MS, helvetica, sans-serif;
-	font-size: 0.8em;
-	font-weight: bold;
-}
-
+.wmd-button-bar{width:100%;background-color:Silver}.wmd-input{height:300px;width:100%;background-color:Gainsboro;border:1px solid DarkGray;color:#000}.wmd-button-row{position:relative;margin-left:5px;margin-right:5px;margin-bottom:5px;margin-top:10px;padding:0;height:20px}.wmd-spacer{width:1px;height:20px;margin-left:14px;position:absolute;background-color:Silver;display:inline-block;list-style:none}.wmd-button{width:20px;height:20px;padding-left:2px;padding-right:3px;position:absolute;display:inline-block;list-style:none;cursor:pointer}.wmd-button>span{background-image:url('wmd-buttons.png');background-repeat:no-repeat;background-position:0 0;width:20px;height:20px;display:inline-block;border-radius:2px}.wmd-spacer1{left:50px}.wmd-spacer2{left:175px}.wmd-spacer3{left:300px}.wmd-prompt-background{background-color:Black}.wmd-prompt-dialog{border:1px solid #999;background-color:#f5f5f5}.wmd-prompt-dialog>div{font-size:.8em;font-family:arial,helvetica,sans-serif}.wmd-prompt-dialog>form>input[type="text"]{border:1px solid #999;color:black}.wmd-prompt-dialog>form>input[type="button"]{border:1px solid #888;font-family:trebuchet MS,helvetica,sans-serif;font-size:.8em;font-weight:bold}
