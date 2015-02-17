@@ -31,8 +31,8 @@ elseif(isset($_GET['edit'])) {
 }
 
 ?>
-<nav id="mra_menu" ondragleave="btnVis()">
-<ul id="sort_menu" class="sortable">
+<nav id="mra_menu" class="mra" ondragleave="btnVis()">
+<ul id="sort_menu" class="sortable" title="Drag-n-drop me!">
 <?php
 $menu_array = parseConf('../menu.conf', true);
 foreach ($menu_array as $name) {

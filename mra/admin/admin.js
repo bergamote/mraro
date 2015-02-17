@@ -30,11 +30,11 @@ function toggleNew(me, path){
   hideNew();
   var addNewLi = me.parentNode;
   var addButton = '<div id="addNew_box">';
-  addButton += ' Type:<select id="new_select_type"> \
+  addButton += ' Title:<input id="new_item_title" type="text">\
+  <br>Type:<select id="new_select_type"> \
   <option value="page">Page</option>\
   <option value="category">Category</option>\
-  </select> Title:<input id="new_item_title" type="text">\
-  <span class="mra_small_button" onclick="hideNew();">Cancel</span>\
+  </select> <span class="mra_small_button" onclick="hideNew();">Cancel</span>\
   <span class="mra_button" onclick="newLink(\'';
   addButton += path; 
   addButton += '\')">Add new</span></div>' ; 
@@ -50,13 +50,18 @@ function hideNew() {
   }
 }
 function newLink(dir) {
+  var title = document.getElementById("new_item_title").value;
+  if(title == ''){ 
+    alert('You must enter a title.');
+    exit;
+  };
   var url = '?action=new&type=';
   var e = document.getElementById('new_select_type');
   var type =  e.options[e.selectedIndex].value;
   url += type+'&dir=';  
   url += encodeURIComponent(dir);
   url += '&title=';  
-  var newtitle = document.getElementById("new_item_title").value;
+  var newtitle = title;
   url += encodeURIComponent(newtitle);
 
   window.location.href = url;
