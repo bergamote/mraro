@@ -17,11 +17,10 @@ if( (!empty($mra['theme'])) && (is_dir(THEME_DIR.$mra['theme'])) ) {
   define("THEME", THEME_DIR);
 }
 
-
 $mra['theme_dir'] = "mra/theme/".mra('theme','','/');
 
 
-if(!empty($_GET['q']))  { // View Page
+if(!empty($_GET['q']))  { // Display Page
   $full_path = CONTENT.urldecode($_GET['q']);
   if( empty($mra['nocache']) && is_file(cache_path()) ){
     readfile( cache_path() ); // Load Cached Page
@@ -41,14 +40,18 @@ if(!empty($_GET['q']))  { // View Page
       header("Location: $error");
       die();
     }
-} else {
-  if(empty($mra['nocache']) && is_file(cache_path($mra['home_page']))){
-    readfile( cache_path($mra['home_page']) ); // Load Cached Home
+} else { // Display Home
+  $menu = parseConf(BASE.'/mra/menu.conf',true);
+  $homepage = ($mra['home_page'] == 'auto') ?
+  $homepage = key($menu) : $homepage = $mra['home_page'];
+
+  if( empty($mra['nocache']) && is_file(cache_path($homepage)) ){
+    readfile( cache_path($homepage) ); // Load Cached Home
     exit;
   } 
-  $home_cache = cache_path($mra['home_page']); 
-  require_once('mra/lib/markdown.php'); 
-  $file = munch(CONTENT.$mra['home_page'], $mra); // Homepage
+  $home_cache = cache_path($homepage); 
+  require_once('mra/lib/markdown.php');
+  $file = munch(CONTENT.$homepage, $mra); 
   $content = $file[0];
   $mra = $file[1]; 
   ob_start(); //start caching

@@ -79,12 +79,16 @@ function mra($key,$pre = "",$post = "") {
 
 function makeMenu($cur = false, $conf = 'mra/menu.conf') {
   $menu_array = parseConf($conf, true);
-  $mrac = parseConf('mra/mra.conf', true);
+  
+  $mrac = parseConf('mra/mra.conf', true);  
+  $homepage = ($mrac['home_page'] == 'auto') ?
+   key($menu_array) : $mrac['home_page'];
+
   foreach ($menu_array as $path => $name) {
     $str .= '<li';
     $str .= ($name == $cur )?  ' class="selected"': '';
     $str .= '><a href="';
-    $str .= ($path != $mrac['home_page'])?'?q='.urlencode($path).'">':'./">';
+    $str .= ($path != $homepage)?'?q='.urlencode($path).'">':'./">';
     $str .= $name;
     $str .= '</a>';
     $str .= '</li>'.PHP_EOL;
