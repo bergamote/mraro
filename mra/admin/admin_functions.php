@@ -67,7 +67,7 @@ function listPage($name, $path) {
     $title = empty($conf['title'])?'Untitled':$conf['title'];
     menuCheck($path, $title);
     echo $title;
-    echo ' <span class="mra_button" onclick="'."ajaxEdit('edit','";
+    echo ' <span class="mra_button" onclick="'."editPage('";
     echo urlencode($path).'\');">Edit</span> ';
     echo ' <span class="mra_small_button" onclick="'."deleteLink('";
     echo urlencode($path).'\');">Delete</span> ';

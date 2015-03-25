@@ -6,14 +6,40 @@ require_once('feedback.php');
 $msg = false;
 $msg_type = false;
 
-$path = isset($current_page)?$current_page:urldecode($_GET['page']);
+$path = isset($current_page) ?
+  $current_page : urldecode($_GET['page']);
 
 $site_conf = parseConf('../mra.conf',true);
 $file = splitConf(CONTENT.$path);
 $page_conf = $file[0];
 $content = $file[1];
 
-if ($_GET['action'] == 'save') {
+if ($_GET['action'] == 'save') { 
+  $new_title = urldecode($_GET['new_title']);
+  if($new_title != $page_conf['title']){ // move file if title changed
+    $page_conf['title'] = $new_title;
+    $old_file = strlen(basename($path));
+    $new_path = substr($path,0, -$old_file);
+    $new_path .= sane($new_title).".md";
+    $move_cmd = 'mv '.CONTENT.$path.' '.CONTENT.$new_path; 
+    exec($move_cmd);
+    $old_menu = parseConf('../menu.conf', true); // Update menu
+    if(isset($old_menu[$path])){
+      $new_menu = array();
+      foreach ($old_menu as $p => $t) {
+        if ($p == $path) {
+          $p = $new_path; $t = $new_title;
+        }
+        $new_menu[$p] = $t;
+      }
+      encodeConf($new_menu, '../menu.conf');
+    }
+    if($site_conf['home_page'] == $path){ // Update homepage
+      $site_conf['home_page'] = $new_path;
+      encodeConf($site_conf, '../mra.conf');
+    }
+    $path = $new_path;
+  }
   $content = urldecode($_GET['wmd-input']);
   $top = '';
   foreach($page_conf as $k => $v){
@@ -27,26 +53,26 @@ if ($_GET['action'] == 'save') {
     $msg = "Error! File not saved";
     $msg_type = 'error';
   }
+  return $path;
 }
 $change_time = filemtime(CONTENT.$path);
 
 $mra = array_merge($site_conf,$page_conf);
-?>
 
+?>
 <form id="page-edit" action="<?= $_SERVER['PHP_SELF'].'?page='.urlencode($path) ?>" method="post">
 <?= feedback($msg,$msg_type); ?>
-<input type="text" name="title" id="title_field" value="<?= mra('title')?>"> 
-<span class="mra_button" onclick="renameLink('<?=$path?>')" >Rename</span>
+Title: <input onkeydown="return (event.keyCode!=13)" type="text" name="title" id="title_field" value="<?= mra('title')?>"> 
+<!--<span class="mra_button" onclick="renameLink('<?=$path?>')" >Rename</span>-->
 
 <div class="wmd-panel">
   <div id="wmd-button-bar"></div>
-  <textarea class="wmd-input" id="wmd-input" name="wmd-input">
+<textarea class="wmd-input" id="wmd-input" name="wmd-input">
 <?= $content ?>
-  </textarea>
+</textarea>
 </div>
-<span class="mra_button" onclick="ajaxEdit('save','<?= urlencode($path) ?>');">
-Save</span>
- <a  class="mra_button" href="../../?q=<?=urlencode($path)?>" target="mra_view">View</a> 
+<span class="mra_button" onclick="saveEdit('<?= urlencode($path) ?>');">Save</span>
+ <a  class="mra_button" href="../../?q=<?= urlencode($path)?>" target="mra_view">View</a> 
  <a  class="mra_button" href="./">Cancel</a> - 
 <i class="small">last saved: <?= date('D j/m/y \a\t h:i a', $change_time) ?></i>
 </form>

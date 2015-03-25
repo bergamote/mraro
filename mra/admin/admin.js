@@ -66,15 +66,7 @@ function newLink(dir) {
 
   window.location.href = url;
 }
-function renameLink(oldpath) {
-  var url = '?action=rename&old_path=';
-  url += encodeURIComponent(oldpath);
-  url += '&new_title=';  
-  var newtitle = document.getElementById("title_field").value;
-  url += encodeURIComponent(newtitle);
 
-  window.location.href = url;
-}
 function deleteLink(path) {
   var answer = window.confirm('Are you sure you want to do this?\
   \n It will delete the page or category (and all its content) FOREVER\nProceed?');
@@ -84,7 +76,7 @@ function deleteLink(path) {
   window.location.href = url;
   }
 }
-function ajaxMenu(action,path,title) {
+function ajaxMenu(action,path,title) { // Menu editing
   action = action || false;
   path = path || 0;
   title = title || 0;
@@ -111,44 +103,17 @@ function ajaxMenu(action,path,title) {
   xmlhttp.send();
 }
 
-function ajaxEdit(action,path,value) {
-  action = action || false;
-  path = path || 0;
-  value = value || 0;
-  url = "edit.php";
-  xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange=function() {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById("main-frame").innerHTML = xmlhttp.responseText;
-      (function () {
-        var converter = new Markdown.Converter();
-        var help = function () { alert("Do you need help?"); }
-        var options = {
-          helpButton: { handler: help },
-          strings: { quoteexample: "put you're quote right here" }
-          };
-        var editor = new Markdown.Editor(converter, "", options);
-        editor.run();
-      })();
-      var wmdInput = document.getElementById("wmd-input").value;
-    }
-  }
-  if (action=='save') {
-    url += '?page='+encodeURIComponent(path);
-    url += '&action=save';
-    var wmdInput = document.getElementById("wmd-input").value;
-    url += '&wmd-input='+encodeURIComponent(wmdInput);
-  }
-  if (action=='rename') {
-    url +='?old_path='+encodeURIComponent(path);
-    url +='&new_title='+encodeURIComponent(value);
-  }
-  if (action=='edit') {
-    url +='?page='+encodeURIComponent(path);
-  }
-  xmlhttp.open("GET",url,true);
-  xmlhttp.send();
-
+function saveEdit( path ) {
+  var url = '?action=save';
+  url += '&page='+encodeURIComponent(path);
+  var wmdInput = document.getElementById("wmd-input").value;
+  url += '&wmd-input='+encodeURIComponent(wmdInput);
+  var newtitle = document.getElementById("title_field").value;    
+  url += '&new_title='+encodeURIComponent(newtitle); 
+  window.location.href = url;
 }
-
+function editPage(path) {
+  var url = "?action=edit&page="+encodeURIComponent(path);
+  window.location.href = url;
+}
 

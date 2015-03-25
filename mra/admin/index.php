@@ -21,8 +21,15 @@ if(!empty($_GET['i'])) { // Show image
       die();
     }
 } elseif(isset($_GET['action'])){
-  $current_page = require_once('file_manager.php');
-} 
+
+  if($_GET['action'] == 'save') {
+    $current_page = include('edit.php');
+  } elseif (isset($_GET['page'])) {
+    $current_page = $_GET['page'];
+  } else {
+    $current_page = require_once('file_manager.php');
+  }
+}
 
 $mra = parseConf('../mra.conf', true);
 ?>
@@ -72,16 +79,14 @@ runArray($dirArray);
 ?>
 </div>
 <article>
-<?php
-if($current_page) {
- $cur_url = urlencode($current_page);
- echo "<script>ajaxEdit('edit','".$cur_url."');</script>";
-}?>
 <div id="main-frame">
 <?php
-
- include('settings.php');
-
+if($current_page) {
+  $_GET['action'] = 'edit';
+  include('edit.php');
+} else {
+  include('settings.php');
+}
 ?>
 </div>
 </article>
