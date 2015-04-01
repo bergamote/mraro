@@ -30,6 +30,21 @@ body {
   color: #555;
   font-family: sans;
 }
+#btn_logout {
+  float: right;
+}
+
+#fileTree.hidden {
+  display: none;
+}
+#fileTree.shown {
+  display:block;
+}
+
+div#btn_files {
+  text-align:center;
+  margin-top:1em;
+}
 
 #main-list,
 #page-settings {
@@ -58,7 +73,7 @@ body {
 #main-list ul {
   padding: 0.2em 0.2em 0.2em 0;
 }
-#main-list > ul {
+#fileTree > ul {
   padding: 0;
   margin: 1em 0 0;
 }
@@ -146,8 +161,8 @@ body.mra_login {
 .mra_feedback_wrap {
   position:relative;
   width: 100%;
-  animation: msg_out 2s 2s 1 forwards;
-  -webkit-animation: msg_out 2s 2s 1 forwards; 
+  animation: msg_out 2s 1s 1 forwards;
+  -webkit-animation: msg_out 2s 1s 1 forwards; 
 }
 .mra_feedback {
   overflow: hidden;
@@ -172,16 +187,24 @@ body.mra_login {
   background: hsl(50,60%,70%);
 }
 @keyframes msg_out {
- from {
-    opacity: 1; }
- to {
-    opacity: 0; }
+from {
+  opacity: 1;
+  z-index:10;
+  }
+to {
+  opacity: 0;
+  z-index:-1;
+  }
 }
 @-webkit-keyframes msg_out {
- from {
-    opacity: 1; }
- to {
-    opacity: 0; }
+from {
+  opacity: 1;
+  z-index:10;
+  }
+to {
+  opacity: 0;
+  z-index:-1;
+  }
 }
 
 /* CSS for nativesortable */

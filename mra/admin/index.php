@@ -46,7 +46,7 @@ $mra = parseConf('../mra.conf', true);
   <script type="text/javascript" src="admin.js"></script>
 </head>
 
-<body onload="startSort()"<?= mra('class',' class="','"')?>>
+<body onload="startSort();checkFileTree()"<?= mra('class',' class="','"')?>>
 <div id="page">
 <header id="mra_header">
 <?= mra('site_title') ?>
@@ -71,12 +71,17 @@ $mra = parseConf('../mra.conf', true);
 
 <a href="../../" target="mra_view" class="mra_button">View site</a> 
 <a href="./" class="mra_button">Settings</a> 
-<a href="session.php?eject=true" class="mra_button">Log out</a>
+<a href="session.php?eject=true" id="btn_logout" class="mra_button">Log out</a>
+
+<div id="fileTree" class="hidden">
 <?php
 $addNewBit = 1;
 $dirArray = dirToArray(CONTENT);
 runArray($dirArray);
 ?>
+</div>
+<div id="btn_files" onclick="togFileTree()" class="mra_button">Show files</div>
+
 </div>
 <article>
 <div id="main-frame">

@@ -26,6 +26,28 @@ function btnVis() {
   document.getElementById("menu_buttons").style.display="block";
 }
 
+function togFileTree() {
+  var tree = document.getElementById("fileTree");
+  var btn = document.getElementById("btn_files");
+  if(tree.className=="hidden"){
+    tree.className="shown";
+    btn.innerHTML = "Hide files";
+  } else {
+    tree.className="hidden";
+    btn.innerHTML = "Show files";
+  }
+}
+
+function checkFileTree() {
+  var url = window.location.href;
+  var parser = document.createElement('a');
+  parser.href = url;
+  var action = parser.search.substring(8,11);
+  if ((action == "new")||(action == "del")) {
+    togFileTree();
+  }
+}
+
 function toggleNew(me, path){
   hideNew();
   var addNewLi = me.parentNode;
@@ -113,7 +135,7 @@ function saveEdit( path ) {
   window.location.href = url;
 }
 function editPage(path) {
-  var url = "?action=edit&page="+encodeURIComponent(path);
+  var url = "?action=edit&page="+path;
   window.location.href = url;
 }
 
