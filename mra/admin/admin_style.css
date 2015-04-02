@@ -46,6 +46,10 @@ div#btn_files {
   margin-top:1em;
 }
 
+article {
+  margin-top:1.2em
+}
+
 #main-list,
 #page-settings {
   max-width: 440px;
@@ -56,7 +60,7 @@ div#btn_files {
 #main-list,
 #page-edit,
 #page-settings {
-  margin: 1em auto 0 auto;
+  margin: 0 auto;
   border: 1px solid hsl(180,10%,60%);
   border-radius: 0.2em;
   background: hsl(180,10%,90%);

@@ -9,7 +9,9 @@ if($_GET['action'] == 'new') {   //------------------- New item
   $new_title = urldecode($_GET['title']);
   if($_GET['type'] == 'page'){
     $new_page_path = $directory.sane($new_title).'.md';
-    $cmd = 'echo "title = '.$new_title.'\n" > '.CONTENT.$new_page_path;
+    $auto_content = 'title = '.$new_title;
+    $auto_content .= "\n\n# ".$new_title."\n";
+    $cmd = 'echo "'.$auto_content.'" > '.CONTENT.$new_page_path;
     exec($cmd);
     $msg = "Page '$new_title' created";
     $msg_type = 'success';

@@ -90,7 +90,7 @@ runArray($dirArray);
 <div id="btn_files" onclick="togFileTree()" class="mra_button">Show files</div>
 
 </div>
-
+<a href="http://mraro.com" target="_blank"><img src="logo-small.png" id="mra_logo_small"></a>
 <div id="main-frame">
 <?php
 if($current_page) {
@@ -101,7 +101,7 @@ if($current_page) {
 }
 ?>
 </div>
-<a href="http://mraro.com" target="_blank"><img src="logo-small.png" id="mra_logo_small"></a>
+
 </article>
 
 <aside class="mra">
