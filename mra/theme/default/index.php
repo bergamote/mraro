@@ -12,27 +12,32 @@
 
 <body>
 
-<header id="mra_header">
+<div id="wrap">
+
+
+<header class="mra">
 <?= mra('site_title') ?>
-
-</header>
-
-<nav id="mra_menu">
+<nav class="mra">
   <ul>
 <?= makeMenu(mra('title')) ?>
   </ul>
 </nav>
+</header>
 
 <article>
 <?= $content ?>
 </article>
 
-<footer id="mra_footer">
-<em><?= mra('site_title') ?><br>
-<?= mra('author') ?><br>
-<a href="mra/admin/">login</a>
-</em>
+<aside class="mra">
+<?= mra('sidebar') ?>
+</aside>
+
+<span class="clear-fix"></span>
+<footer class="mra small lighter">
+ powered by <a href="http://mraro.com" target="_blank">MrAro</a> -
+ <a href="mra/admin/">login</a>
 </footer>
 
+</div><!-- Close #wrap -->
 </body>
 </html>

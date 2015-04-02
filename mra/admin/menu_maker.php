@@ -30,14 +30,9 @@ elseif(isset($_GET['edit'])) {
   clearcache();
 }
 
-?>
-<nav id="mra_menu" class="mra" ondragleave="btnVis()">
-<ul id="sort_menu" class="sortable" title="Drag-n-drop me!">
-<?php
 $menu_array = parseConf('../menu.conf', true);
 foreach ($menu_array as $name) {
   echo '<li>'.$name.'</li>'.PHP_EOL;
 }
 ?>
-</ul>
-</nav>
+

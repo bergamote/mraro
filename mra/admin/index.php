@@ -32,6 +32,8 @@ if(!empty($_GET['i'])) { // Show image
 }
 
 $mra = parseConf('../mra.conf', true);
+
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -47,43 +49,48 @@ $mra = parseConf('../mra.conf', true);
 </head>
 
 <body onload="startSort();checkFileTree()"<?= mra('class',' class="','"')?>>
-<div id="page">
-<header id="mra_header">
-<?= mra('site_title') ?>
-</header>
 
-<div id="menu_maker">
-  <div id="menu_wrap">
-  <?php
-  include_once('menu_maker.php');
-  ?>
-  </div>
-  <div class="clear-fix"></div>
-  <div id="menu_buttons">
-    <button type="button" onclick="ajaxMenu()">Undo</button> 
-    <button type="button" onclick="ajaxMenu('save')">Save</button>
-  </div>
+<div id="wrap">
+
+<header class="mra">
+<?= mra('site_title') ?>
+<nav id="menu_wrap" class="mra" ondragleave="btnVis()">
+<ul id="menu_ul" class="sortable" title="Drag-n-drop me!">
+<?php
+include_once('menu_maker.php');
+?>
+</ul>
+
+<div id="menu_buttons">
+  <button type="button" onclick="ajaxMenu()">Undo</button> 
+  <button type="button" onclick="ajaxMenu('save')">Save</button>
 </div>
 
+</nav>
+</header>
+
+<article>
+
 <div id="main-list">
-
 <?= feedback($msg, $msg_type); ?>
-
 <a href="../../" target="mra_view" class="mra_button">View site</a> 
 <a href="./" class="mra_button">Settings</a> 
 <a href="session.php?eject=true" id="btn_logout" class="mra_button">Log out</a>
 
 <div id="fileTree" class="hidden">
+<ul>
 <?php
 $addNewBit = 1;
 $dirArray = dirToArray(CONTENT);
 runArray($dirArray);
 ?>
+</ul>
 </div>
+
 <div id="btn_files" onclick="togFileTree()" class="mra_button">Show files</div>
 
 </div>
-<article>
+
 <div id="main-frame">
 <?php
 if($current_page) {
@@ -94,8 +101,21 @@ if($current_page) {
 }
 ?>
 </div>
+<a href="http://mraro.com" target="_blank"><img src="logo-small.png" id="mra_logo_small"></a>
 </article>
-</div> <!-- close page -->
+
+<aside class="mra">
+<?
+if(is_file(CONTENT.".sidebar.md")) {
+  require_once('../lib/markdown.php');
+  $sidebar = munch(CONTENT.".sidebar.md");
+  echo $sidebar[0];
+}?>
+<br>
+<a class="mra_button" onclick="editPage('.sidebar.md');">Edit side bar</a>
+</aside>
+
+</div> <!-- close #wrap -->
 
 </body>
 

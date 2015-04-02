@@ -36,7 +36,6 @@ function dirToArray($dir) {
 
 # Go through the folder array 
 function runArray($theArray, $path = '') {
-  echo '<ul>';
   foreach ($theArray as $k => $v) {
     if(is_array($v)) { 
       listCategory($k, $v, $path);
@@ -45,7 +44,6 @@ function runArray($theArray, $path = '') {
     }
   }
   addNewPage($path);
-  echo '</ul>';
 }
 function validFiles($name) {
   if( (substr($name, 0, 1) != '.') 
@@ -59,19 +57,19 @@ function validFiles($name) {
 # html list item for Pages
 function listPage($name, $path) {
   if(validFiles($name)) {
-    echo '<li class="page">';
+    echo '  <li class="page">';
     $path = (empty($path))?$name:$path.$name;
     $real_path = CONTENT.$path;
     $firstline=`head -n1 $real_path`;
     $conf = parseConf($firstline);
     $title = empty($conf['title'])?'Untitled':$conf['title'];
     menuCheck($path, $title);
-    echo $title;
-    echo ' <span class="mra_button" onclick="'."editPage('";
-    echo urlencode($path).'\');">Edit</span> ';
-    echo ' <span class="mra_small_button" onclick="'."deleteLink('";
-    echo urlencode($path).'\');">Delete</span> ';
-    echo '</li>'.PHP_EOL;
+    echo $title.PHP_EOL;
+    echo '    <span class="mra_button" onclick="'."editPage('";
+    echo urlencode($path).'\');">Edit</span> '.PHP_EOL;
+    echo '    <span class="mra_small_button" onclick="'."deleteLink('";
+    echo urlencode($path).'\');">Delete</span> '.PHP_EOL;
+    echo '  </li>'.PHP_EOL;
   }
 }
 # html unordered list for Category
@@ -80,13 +78,13 @@ function listCategory($name, $dir, $path) {
   $conf = CONTENT. DIRECTORY_SEPARATOR . $path.'.mra';
   $cat_conf = parseConf($conf, true);
   $title = empty($cat_conf['title'])?'Untitled':$cat_conf['title'];
-  echo '<li class="category">';
+  echo '  <li class="category">';
   //menuCheck($path, $title);
   echo $title;
-  echo ' <span class="mra_small_button" onclick="'."deleteLink('";
+  echo '    <span class="mra_small_button" onclick="'."deleteLink('";
   echo urlencode($path).'\');">Delete</span> ';
   runArray($dir, $path);                
-  echo '</li>'.PHP_EOL;
+  echo '  </li>'.PHP_EOL;
 }
 # Add New
 function addNewPage($path) {

@@ -61,9 +61,15 @@ $mra = array_merge($site_conf,$page_conf);
 
 ?>
 <form id="page-edit" action="<?= $_SERVER['PHP_SELF'].'?page='.urlencode($path) ?>" method="post">
-<?= feedback($msg,$msg_type); ?>
+<?
+echo feedback($msg,$msg_type);
+
+if($path == ".sidebar.md"){ ?>
+Editing side bar
+<input type="hidden" name="title" id="title_field" value=".sidebar"> 
+<?php }else{ ?>
 Title: <input onkeydown="return (event.keyCode!=13)" type="text" name="title" id="title_field" value="<?= mra('title')?>"> 
-<!--<span class="mra_button" onclick="renameLink('<?=$path?>')" >Rename</span>-->
+<?php } ?>
 
 <div class="wmd-panel">
   <div id="wmd-button-bar"></div>

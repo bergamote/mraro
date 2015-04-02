@@ -3,7 +3,7 @@ function listMenu(urlencode) {
   urlencode = urlencode || true;
   var node, list, arrValue;
   list = [];
-  for (node = document.getElementById('sort_menu').firstChild;
+  for (node = document.getElementById('menu_ul').firstChild;
       node;
       node = node.nextSibling) {
       if (node.nodeType == 1 && node.tagName == 'LI') {
@@ -18,7 +18,7 @@ function listMenu(urlencode) {
 }
 
 function startSort() {
-  var sortable = document.getElementById("sort_menu");
+  var sortable = document.getElementById("menu_ul");
   nativesortable(sortable, { change: onchange });
 }
 
@@ -107,7 +107,7 @@ function ajaxMenu(action,path,title) { // Menu editing
   xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange=function() {
     if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-      document.getElementById("menu_wrap").innerHTML = xmlhttp.responseText;
+      document.getElementById("menu_ul").innerHTML = xmlhttp.responseText;
       startSort();
       buttons.style.display="none"; 
     }
@@ -138,4 +138,5 @@ function editPage(path) {
   var url = "?action=edit&page="+path;
   window.location.href = url;
 }
+
 

@@ -106,7 +106,7 @@ function showRaw($file) {
 
 function sane($string) { // Name sanitizing function
 	$string = strtolower(str_replace(" ", "_", $string));
-	$string = preg_replace('![^/\w-]!', "", $string);
+	$string = preg_replace('![^/a-z0-9_\-.]!', "", $string);
 	return $string;
 };
 
