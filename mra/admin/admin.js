@@ -139,4 +139,25 @@ function editPage(path) {
   window.location.href = url;
 }
 
+// ---------------------------------- CTRL+S save document in edit mode
 
+
+function addEv(path){
+    window.addEventListener('keydown', function(e){saveShortcut(e, path)});
+}
+
+function removeEv(path) {
+    window.removeEventListener('keydown', function(e){saveShortcut(e, path)});
+}
+
+function saveShortcut(e, path) {
+if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)){
+    e.preventDefault();
+    console.log('ctrl+s');
+    saveEdit( path );
+    return false;
+  }
+}
+
+
+    

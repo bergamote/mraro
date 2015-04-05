@@ -18,6 +18,6 @@ mra/theme/*
 
 # favicons
 favicon.ico
-apple-touch-icon-precomposed.png
-apple-touch-icon.png
+apple-touch-icon*
+
 

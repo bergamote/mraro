@@ -68,12 +68,14 @@ if($path == ".sidebar.md"){ ?>
 Editing side bar
 <input type="hidden" name="title" id="title_field" value=".sidebar"> 
 <?php }else{ ?>
-Title: <input onkeydown="return (event.keyCode!=13)" type="text" name="title" id="title_field" value="<?= mra('title')?>"> 
+Title: <input onkeydown="return (event.keyCode!=13)" type="text" 
+name="title" id="title_field" value="<?= mra('title')?>"> 
 <?php } ?>
 
 <div class="wmd-panel">
   <div id="wmd-button-bar"></div>
-<textarea class="wmd-input" id="wmd-input" name="wmd-input">
+<textarea class="wmd-input" id="wmd-input" name="wmd-input"
+ onfocus="addEv('<?= urlencode($path) ?>')" onblur="removeEv('<?= urlencode($path) ?>')">
 <?= $content ?>
 </textarea>
 </div>
