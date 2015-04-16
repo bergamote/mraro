@@ -83,12 +83,19 @@ function makeMenu($cur = false, $conf = 'mra/menu.conf') {
   $mrac = parseConf('mra/mra.conf', true);  
   $homepage = ($mrac['home_page'] == 'auto') ?
    key($menu_array) : $mrac['home_page'];
-
+  
   foreach ($menu_array as $path => $name) {
+    $q = '/?q=';
+    $link_path = $path;
+    if($mrac['nginx_url']) {
+      $q = '/';
+      $link_path = substr($path, 0, -3);
+    }
     $str .= '<li';
     $str .= ($name == $cur )?  ' class="selected"': '';
     $str .= '><a href="';
-    $str .= ($path != $homepage)?'?q='.urlencode($path).'">':'./">';
+    $str .= ($path != $homepage)? 
+      $q.$link_path.'">' : '/">';
     $str .= $name;
     $str .= '</a>';
     $str .= '</li>'.PHP_EOL;

@@ -84,7 +84,7 @@ name="title" id="title_field" value="<?= mra('title')?>">
  <a  class="mra_button" href="./">Cancel</a> - 
 <i class="small">last saved: <?= date('D j/m/y \a\t h:i a', $change_time) ?></i>
 </form>
-<div id="wmd-preview" class="wmd-panel wmd-preview"></div>
+<div id="wmd-preview" class="wmd-panel wmd-preview<?= mra("class",' ') ?>"></div>
 <?php
 if(isset($current_page)) {
 ?>

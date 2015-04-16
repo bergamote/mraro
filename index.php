@@ -6,7 +6,7 @@ define("BASE", getcwd());
 define("CONTENT", BASE."/content/");
 define("CACHE", BASE."/mra/tmp/");
 define("UPLOADS", "uploads/");
-define("IMAGES", "uploads/img/");
+define("IMAGES", "uploads/img");
 define("THEME_DIR", BASE."/mra/theme/");
 
 $mra = parseConf(BASE."/mra/mra.conf", true);
@@ -38,7 +38,7 @@ if(!empty($_GET['q']))  { // Display Page
 } elseif(!empty($_GET['i'])) { // Show image
   $i = IMAGES.$_GET['i'];
     if(is_file($i)){
-      header("Location: $i");
+      header("Location: /$i");
       die();
     } else {
       $error = IMAGES."error.png";

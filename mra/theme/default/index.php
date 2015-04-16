@@ -10,7 +10,7 @@
   <![endif]-->
 </head>
 
-<body>
+<body<?= mra('class',' class="','"') ?>>
 
 <div id="wrap">
 
