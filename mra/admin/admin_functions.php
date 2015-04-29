@@ -60,7 +60,7 @@ function listPage($name, $path) {
     echo '  <li class="page">';
     $path = (empty($path))?$name:$path.$name;
     $real_path = CONTENT.$path;
-    $firstline=`head -n1 $real_path`;
+    $firstline= fgets(fopen($real_path, 'r'));;
     $conf = parseConf($firstline);
     $title = empty($conf['title'])?'Untitled':$conf['title'];
     menuCheck($path, $title);
