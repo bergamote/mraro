@@ -36,12 +36,12 @@ if(!empty($_GET['q']))  { // Display Page
   $content = $file[0];
   $mra = $file[1];
 } elseif(!empty($_GET['i'])) { // Show image
-  $i = IMAGES.$_GET['i'];
+  $i = IMAGES.'/'.$_GET['i'];
     if(is_file($i)){
-      header("Location: /$i");
+      header("Location: $i");
       die();
     } else {
-      $error = IMAGES."error.png";
+      $error = IMAGES.'/'."error.png";
       header("Location: $error");
       die();
     }
