@@ -3,21 +3,11 @@ require_once('admin_functions.php');
 define("IMAGES", $_SERVER['DOCUMENT_ROOT'].'/uploads/img/');
 define("IMAGES_REL", '../../uploads/img/');
 ?>
-
+<!DOCTYPE html>
 <html>
 <head>
-<style>
-  div.img_thmb {
-    width: 150px;
-    float: left;
-    margin: 0.2em;
-    border: 1px solid black;
-  }
-  div.img_thmb img {
-    max-width: 100%;
-    max-height: 100%;
-  }
-</style>
+<link rel="stylesheet" href="admin_style.css">
+<script src="admin.js"></script>
 </head>
 <body>
 
@@ -61,26 +51,33 @@ if(isset($_POST['submit_image'])) {
   }
   echo $message;
 } elseif(isset($_GET['delete'])) {
-  $del_file = $_GET['delete'];
+  $del_file = urldecode($_GET['delete']);
   if(unlink(IMAGES.$del_file)) {
     echo "File $del_file deleted";
   }
 }
-
 ?>
-<form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
-	Upload <input type="file" name="image" size="25">
+
+<form id="image-upload" action="<?= $_SERVER['PHP_SELF'] ?>"
+ method="post" enctype="multipart/form-data">
+	Upload <input type="file" name="image" size="25" accept=".jpg">
 	<input type="submit" name="submit_image" value="Submit">
 </form>
-<hr>
+<br><br>
+<ul id="img-gallery">
 <?php
 $image_list = glob(IMAGES_REL."*.jpg");
 usort($image_list, create_function('$a,$b', 'return filemtime($a) - filemtime($b);'));
 foreach (array_reverse($image_list) as $filename) {
     $link = basename($filename);
-    echo "<div class=\"img_thmb\"><img src=\"$filename\"><br>/?i=$link <br><a href=\"?delete=$link\">[delete]</a></div>";
+    echo "<li class=\"img_thmb\"><img src=\"$filename\"><br>/?i=$link <br>
+    
+    <a class=\"mra_small_button\" 
+     onclick=\"delete_img('$link')\">[delete]</a></li>";
 }
 ?>
+</ul>
+
 </body>
 </html>
 
