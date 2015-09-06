@@ -89,11 +89,17 @@ article {
   margin-top:0;
 }
 
-li.category {
-  background: hsl(180,5%,80%);
+#main-list ul.category {
+  background: #B4C2C0;
   border-radius:0.2em;
+  padding-left: 0.4em;
 }
-
+#main-list ul.category ul {
+  background: #90B0AB;
+  border-radius:0.2em;
+  padding-left: 0.4em;
+  margin-right: 0.4em;
+}
 #main-list li.new div{
   background: hsl(180,25%,90%);
   border-radius:0.2em;

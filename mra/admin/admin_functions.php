@@ -78,13 +78,13 @@ function listCategory($name, $dir, $path) {
   $conf = CONTENT. DIRECTORY_SEPARATOR . $path.'.mra';
   $cat_conf = parseConf($conf, true);
   $title = empty($cat_conf['title'])?'Untitled':$cat_conf['title'];
-  echo '  <li class="category">';
+  echo '  <ul class="category">';
   //menuCheck($path, $title);
   echo $title;
   echo '    <span class="mra_small_button" onclick="'."deleteLink('";
   echo urlencode($path).'\');">Delete</span> ';
   runArray($dir, $path);                
-  echo '  </li>'.PHP_EOL;
+  echo '  </ul>'.PHP_EOL;
 }
 # Add New
 function addNewPage($path) {
