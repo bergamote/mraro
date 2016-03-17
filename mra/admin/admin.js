@@ -159,5 +159,33 @@ if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)
   }
 }
 
+// ----------------- Image manager 
 
-    
+function showImgManager() {
+  var overlay = document.createElement('div');
+  overlay.id = 'img_overlay'; 
+  overlay.onclick = hideImgManager;   
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+  var img_frame = document.createElement('iframe');
+  img_frame.id = 'img_frame';
+  img_frame.src = 'img_manager.php';
+  overlay.appendChild(img_frame);
+}
+
+function delete_img(path) {
+  var answer = window.confirm('Are you sure you want to delete this image forever and ever?');
+  if(answer) {
+  var url = 'img_manager.php?delete=';
+  url += encodeURIComponent(path);
+  location.href = url;
+  }
+}
+
+function hideImgManager() {
+
+  var img_o = document.getElementById('img_overlay');
+  img_o.parentNode.removeChild(img_o);
+  document.body.style.overflow = 'visible';
+}
+

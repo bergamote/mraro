@@ -71,7 +71,8 @@ Editing side bar
 Title: <input onkeydown="return (event.keyCode!=13)" type="text" 
 name="title" id="title_field" value="<?= mra('title')?>"> 
 <?php } ?>
- <a class="mra_button" target="_blank" href="img_manager.php">Images</a>
+<span class="mra_button" onclick="showImgManager()">Gallery</span>
+ 
 
 <div class="wmd-panel">
   <div id="wmd-button-bar"></div>
