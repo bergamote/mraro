@@ -66,7 +66,7 @@ if(isset($_POST['submit_image'])) {
 <br><br>
 <ul id="img-gallery">
 <?php
-$image_list = glob("*.{jpg,png,gif}", GLOB_BRACE);
+$image_list = glob(IMAGES_REL."*.{jpg,png,gif}", GLOB_BRACE);
 usort($image_list, create_function('$a,$b', 'return filemtime($a) - filemtime($b);'));
 foreach (array_reverse($image_list) as $filename) {
     $link = basename($filename);
