@@ -60,7 +60,7 @@ if(isset($_POST['submit_image'])) {
 
 <form id="image-upload" action="<?= $_SERVER['PHP_SELF'] ?>"
  method="post" enctype="multipart/form-data">
-	Upload <input type="file" name="image" size="25" accept=".jpg">
+	Upload <input type="file" name="image" size="25" accept=".jpg, .png, .gif">
 	<input type="submit" name="submit_image" value="Submit">
 </form>
 <br><br>
