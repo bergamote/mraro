@@ -30,7 +30,7 @@ if(isset($_POST['submit_image'])) {
 		  }
       $path = $_FILES['image']['name'];
       $ext = pathinfo($path, PATHINFO_EXTENSION);
-      if($ext != 'jpg') {
+      if (!in_array($ext, array("jpg", "png", "gif"))){
 			  $valid_file = false;
 			  $message = 'Oops!  Your file must be a JPEG Image with a .jpg extension.';        
       }
@@ -60,13 +60,13 @@ if(isset($_POST['submit_image'])) {
 
 <form id="image-upload" action="<?= $_SERVER['PHP_SELF'] ?>"
  method="post" enctype="multipart/form-data">
-	Upload <input type="file" name="image" size="25" accept=".jpg">
+	Upload <input type="file" name="image" size="25" accept=".jpg, .png, .gif">
 	<input type="submit" name="submit_image" value="Submit">
 </form>
 <br><br>
 <ul id="img-gallery">
 <?php
-$image_list = glob(IMAGES_REL."*.jpg");
+$image_list = glob(IMAGES_REL."*.{jpg,png,gif}", GLOB_BRACE);
 usort($image_list, create_function('$a,$b', 'return filemtime($a) - filemtime($b);'));
 foreach (array_reverse($image_list) as $filename) {
     $link = basename($filename);
