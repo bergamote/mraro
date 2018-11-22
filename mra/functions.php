@@ -1,11 +1,13 @@
 <?php
 
 function cache_path($home=false) { //create cache path
-  $path = $_GET['q'];
+  if (isset($_GET['q'])) {
+    $path = $_GET['q'];
+  }
   if($home){$path = $home;}
   $mod_time = filemtime(CONTENT.$path);
   $path = str_replace('/','-',$path);
-  return CACHE.$path.$mod_time.".html";  
+  return CACHE.$path.$mod_time.".html";
 }
 
 function cache_output( $buffer ) {
@@ -24,7 +26,7 @@ function splitConf($str) {
   $valid = true;
   foreach ($conf_line as $line) {
     if(substr_count($line, "=") != 1) {
-    # Require one = sign on each line    
+    # Require one = sign on each line
       $valid = false;
     }
   }
@@ -41,7 +43,7 @@ function parseConf($conf, $file = false) {
   foreach ($lines as $line) {
     $line = trim($line);
     if(empty($line) ||
-      (substr($line, 0, 1) == '#') || 
+      (substr($line, 0, 1) == '#') ||
       (substr_count($line, "=") != 1)
       ) {
       continue;
@@ -79,11 +81,11 @@ function mra($key,$pre = "",$post = "") {
 
 function makeMenu($cur = false, $conf = 'mra/menu.conf') {
   $menu_array = parseConf($conf, true);
-  
-  $mrac = parseConf('mra/mra.conf', true);  
+
+  $mrac = parseConf('mra/mra.conf', true);
   $homepage = ($mrac['home_page'] == 'auto') ?
    key($menu_array) : $mrac['home_page'];
-  
+  $str = '';
   foreach ($menu_array as $path => $name) {
     $q = '/?q=';
     $link_path = $path;
@@ -94,12 +96,12 @@ function makeMenu($cur = false, $conf = 'mra/menu.conf') {
     $str .= '<li';
     $str .= ($name == $cur )?  ' class="selected"': '';
     $str .= '><a href="';
-    $str .= ($path != $homepage)? 
+    $str .= ($path != $homepage)?
       $q.$link_path.'">' : '/">';
     $str .= $name;
     $str .= '</a>';
     $str .= '</li>'.PHP_EOL;
-  } 
+  }
   return $str;
 }
 

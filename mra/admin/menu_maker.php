@@ -10,7 +10,7 @@ if(isset($_GET['menu'])) {
   foreach($order_menu as $v) {
     $path = array_keys($old_menu, $v);
     $k = $path[0];
-    $new_menu[$k] = urldecode($v); 
+    $new_menu[$k] = urldecode($v);
   }
   encodeConf($new_menu, '../menu.conf');
   clearcache();
@@ -31,8 +31,8 @@ elseif(isset($_GET['edit'])) {
 }
 
 $menu_array = parseConf('../menu.conf', true);
+
 foreach ($menu_array as $name) {
   echo '<li>'.$name.'</li>'.PHP_EOL;
 }
 ?>
-

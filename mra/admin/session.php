@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) { //If no session started:
+    session_start();                        //we start one
+}
 $msg = false;
 $msg_type = false;
 if (isset($_GET['eject'])) {

@@ -6,6 +6,7 @@ require_once('../functions.php');
 
 # Encode a configutation array into a string or a file
 function encodeConf( $conf, $file = false) {
+  $str = '';
   foreach($conf as $k => $v) {
     $str .= $k .' = '.$v.PHP_EOL;
   }
@@ -16,10 +17,10 @@ function encodeConf( $conf, $file = false) {
   }
 }
 function clearcache() {
-  $cmd = `rm ../tmp/*`; 
+  $cmd = `rm ../tmp/*`;
 }
 
-# Go through a folder recursively and put 
+# Go through a folder recursively and put
 # the structure in an array
 function dirToArray($dir) {
   $contents = array();
@@ -34,21 +35,21 @@ function dirToArray($dir) {
   return $contents;
 }
 
-# Go through the folder array 
+# Go through the folder array
 function runArray($theArray, $path = '') {
   foreach ($theArray as $k => $v) {
-    if(is_array($v)) { 
+    if(is_array($v)) {
       listCategory($k, $v, $path);
-    } else { 
+    } else {
       listPage($v, $path) ;
     }
   }
   addNewPage($path);
 }
 function validFiles($name) {
-  if( (substr($name, 0, 1) != '.') 
+  if( (substr($name, 0, 1) != '.')
   && (substr($name, -1) != '~')) {
-    return true; 
+    return true;
   } else {
     return false;
   }
@@ -83,7 +84,7 @@ function listCategory($name, $dir, $path) {
   echo $title;
   echo '    <span class="mra_small_button" onclick="'."deleteLink('";
   echo urlencode($path).'\');">Delete</span> ';
-  runArray($dir, $path);                
+  runArray($dir, $path);
   echo '  </ul>'.PHP_EOL;
 }
 # Add New
@@ -91,7 +92,7 @@ function addNewPage($path) {
   global $addNewBit;
   echo '<li class="new" id="addNew_'.$addNewBit.'"
     class="mra_buttons">';
-  echo '<span class="mra_button" 
+  echo '<span class="mra_button"
     onclick="toggleNew(this, \''.$path.'\')">
         New</span></li>';
   $addNewBit++;
@@ -99,10 +100,10 @@ function addNewPage($path) {
 
 # 'In menu' checkbox
 function menuCheck($path, $title) {
-  echo '<input name="menuSel" type="checkbox" ';
+  echo '<input name="menuSel" type="checkbox" title="Make visible in menu" ';
   $menu = parseConf('../menu.conf', true);
   if(array_key_exists($path,$menu)){
-    echo 'checked'; 
+    echo 'checked';
   }
   echo " onchange=\"ajaxMenu('edit','".$path."','".$title."')\">";
 }

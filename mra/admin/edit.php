@@ -1,5 +1,5 @@
 <?php
-define("CONTENT", '../../content/');
+//define("CONTENT", '../../content/');
 require_once('admin_functions.php');
 
 require_once('feedback.php');
@@ -14,14 +14,14 @@ $file = splitConf(CONTENT.$path);
 $page_conf = $file[0];
 $content = $file[1];
 
-if ($_GET['action'] == 'save') { 
+if ($_GET['action'] == 'save') {
   $new_title = urldecode($_GET['new_title']);
   if($new_title != $page_conf['title']){ // move file if title changed
     $page_conf['title'] = $new_title;
     $old_file = strlen(basename($path));
     $new_path = substr($path,0, -$old_file);
     $new_path .= sane($new_title).".md";
-    $move_cmd = 'mv '.CONTENT.$path.' '.CONTENT.$new_path; 
+    $move_cmd = 'mv '.CONTENT.$path.' '.CONTENT.$new_path;
     exec($move_cmd);
     $old_menu = parseConf('../menu.conf', true); // Update menu
     if(isset($old_menu[$path])){
@@ -61,18 +61,18 @@ $mra = array_merge($site_conf,$page_conf);
 
 ?>
 <form id="page-edit" action="<?= $_SERVER['PHP_SELF'].'?page='.urlencode($path) ?>" method="post">
-<?
+<?php
 echo feedback($msg,$msg_type);
 
 if($path == ".sidebar.md"){ ?>
 Editing side bar
-<input type="hidden" name="title" id="title_field" value=".sidebar"> 
-<?php }else{ ?>
-Title: <input onkeydown="return (event.keyCode!=13)" type="text" 
-name="title" id="title_field" value="<?= mra('title')?>"> 
+<input type="hidden" name="title" id="title_field" value=".sidebar">
+<?php } else { ?>
+Title: <input onkeydown="return (event.keyCode!=13)" type="text"
+name="title" id="title_field" value="<?= mra('title')?>">
 <?php } ?>
 <span class="mra_button" onclick="showImgManager()">Gallery</span>
- 
+
 
 <div class="wmd-panel">
   <div id="wmd-button-bar"></div>
@@ -82,8 +82,8 @@ name="title" id="title_field" value="<?= mra('title')?>">
 </textarea>
 </div>
 <span class="mra_button" onclick="saveEdit('<?= urlencode($path) ?>');">Save</span>
- <a  class="mra_button" href="../../?q=<?= urlencode($path)?>" target="mra_view">View</a> 
- <a  class="mra_button" href="./">Cancel</a> - 
+ <a  class="mra_button" href="../../?q=<?= urlencode($path)?>" target="mra_view">View</a>
+ <a  class="mra_button" href="./">Cancel</a> -
 <i class="small">last saved: <?= date('D j/m/y \a\t h:i a', $change_time) ?></i>
 </form>
 <div id="wmd-preview" class="wmd-panel wmd-preview<?= mra("class",' ') ?>"></div>
@@ -104,4 +104,3 @@ if(isset($current_page)) {
 </script>
 <?php
 };
-

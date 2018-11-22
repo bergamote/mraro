@@ -1,5 +1,5 @@
 <?php
-# mraro 
+# mraro
 require_once('mra/functions.php');
 
 define("BASE", getcwd());
@@ -21,7 +21,7 @@ $mra['theme_dir'] = "mra/theme/".mra('theme','','/');
 
 if(is_file(CONTENT.".sidebar.md")) {
   require_once('mra/lib/markdown.php');
-  $sidebar = munch(CONTENT.".sidebar.md");
+  $sidebar = munch(CONTENT.".sidebar.md", $mra);
   $mra['sidebar'] = $sidebar[0];
 }
 
@@ -54,13 +54,13 @@ if(!empty($_GET['q']))  { // Display Page
     readfile( cache_path($homepage) ); // Load Cached Home
     exit;
   }
-  $home_cache = cache_path($homepage); 
+  $home_cache = cache_path($homepage);
   require_once('mra/lib/markdown.php');
-  $file = munch(CONTENT.$homepage, $mra); 
+  $file = munch(CONTENT.$homepage, $mra);
   $content = $file[0];
-  $mra = $file[1]; 
+  $mra = $file[1];
   ob_start(); //start caching
-  
+
   require_once(THEME.'index.php');
   $buffer = ob_get_flush();
   file_put_contents( $home_cache, $buffer );
@@ -71,7 +71,3 @@ if(!empty($_GET['q']))  { // Display Page
 
 ob_start( 'cache_output' ); //start caching
 include(THEME.'index.php');
-
-
-
-
