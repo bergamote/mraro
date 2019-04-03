@@ -102,7 +102,9 @@ function makeMenu($cur = false, $conf = 'mra/menu.conf') {
     $str .= '</a>';
     $str .= '</li>'.PHP_EOL;
   }
-  return $str;
+  if (count($menu_array) > 1) {
+    return $str;
+  }
 }
 
 function showRaw($file) {
