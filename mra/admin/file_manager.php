@@ -61,7 +61,7 @@ if($_GET['action'] == 'new') {   //------------------- New item
       return false;  
     }
   }
-} elseif($_GET['action'] == 'clear-cache') {  //Clear cached pages
+} elseif($_GET['action'] == 'clear-cache') {  // Clear cached pages
   clearcache();
   $msg = "Cache cleared";
   $msg_type = 'success';

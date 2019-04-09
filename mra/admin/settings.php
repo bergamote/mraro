@@ -3,6 +3,7 @@
 <b>Settings</b> <i class="small">(edit in mra.conf)</i>
 <br><br>
 <?php 
+# Show menu.conf
 foreach ($mra as $key => $value) {
   if ($key == 'theme'){
     home_setting($mra);
@@ -48,7 +49,6 @@ if (count(glob(CACHE."/*")) != 0 ) {
 }else{
   echo "Cache: empty";
 }
-
 ?>
 </div>
 </div>

@@ -1,7 +1,9 @@
 <?php
-# mraro
+# mraro index
+
 require_once('mra/functions.php');
 
+# Setup some useful folders as constants.
 define("BASE", getcwd());
 define("CONTENT", BASE."/content/");
 define("CACHE", BASE."/mra/tmp/");
@@ -11,31 +13,43 @@ define("THEME_DIR", BASE."/mra/theme/");
 
 $mra = parseConf(BASE."/mra/mra.conf", true);
 
+# Set mra[theme] to default theme if 
+# no other theme specified in mra.conf.
 if( (!empty($mra['theme'])) && (is_dir(THEME_DIR.$mra['theme'])) ) {
   define("THEME", THEME_DIR.$mra['theme'].'/');
 } else {
   define("THEME", THEME_DIR);
 }
-
+# Set theme directory from mra[theme].
 $mra['theme_dir'] = "mra/theme/".mra('theme','','/');
 
+# Check if .sidebar.md is present and 
+# store it in mra[sidebar] if yes.
 if(is_file(CONTENT.".sidebar.md")) {
   require_once('mra/lib/markdown.php');
   $sidebar = munch(CONTENT.".sidebar.md", $mra);
   $mra['sidebar'] = $sidebar[0];
 }
 
-if(!empty($_GET['q']))  { // Display Page
+## Check the query string:
+
+# If page is queried
+if(!empty($_GET['q']))  { 
   $full_path = CONTENT.urldecode($_GET['q']);
+  # If page is already cached, show that,
   if( empty($mra['nocache']) && is_file(cache_path()) ){
-    readfile( cache_path() ); // Load Cached Page
+    readfile( cache_path() ); 
     exit;
   }
+  # otherwise prepare page as $content and $mra
+  # (template + cache after conditional check).
   require_once('mra/lib/markdown.php');
   $file = munch($full_path, $mra);
   $content = $file[0];
   $mra = $file[1];
-} elseif(!empty($_GET['i'])) { // Show image
+  
+# If image is queried
+} elseif(!empty($_GET['i'])) { 
   $i = IMAGES.'/'.$_GET['i'];
     if(is_file($i)){
       header("Location: $i");
@@ -45,22 +59,25 @@ if(!empty($_GET['q']))  { // Display Page
       header("Location: $error");
       die();
     }
-} else { // Display Home
+    
+# If nothing is queried, display Home    
+# (the first entry in menu.conf).
+} else { 
   $menu = parseConf(BASE.'/mra/menu.conf',true);
   $homepage = ($mra['home_page'] == 'auto') ?
     key($menu) : $mra['home_page'];
-
+  # If home is cached, load cache.
   if( empty($mra['nocache']) && is_file(cache_path($homepage)) ){
-    readfile( cache_path($homepage) ); // Load Cached Home
+    readfile( cache_path($homepage) ); 
     exit;
   }
+  # otherwise process the homepage and cache it.
   $home_cache = cache_path($homepage);
   require_once('mra/lib/markdown.php');
   $file = munch(CONTENT.$homepage, $mra);
   $content = $file[0];
   $mra = $file[1];
   ob_start(); //start caching
-
   require_once(THEME.'index.php');
   $buffer = ob_get_flush();
   file_put_contents( $home_cache, $buffer );
@@ -69,5 +86,6 @@ if(!empty($_GET['q']))  { // Display Page
   exit;
 }
 
+# Process a normal page and cache it.
 ob_start( 'cache_output' ); //start caching
 include(THEME.'index.php');

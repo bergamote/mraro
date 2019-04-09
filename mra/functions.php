@@ -1,6 +1,9 @@
 <?php
+# mraro functions
 
-function cache_path($home=false) { //create cache path
+## Caching functions:
+# Create cache path based on last mod time.
+function cache_path($home=false) { 
   if (isset($_GET['q'])) {
     $path = $_GET['q'];
   }
@@ -9,7 +12,7 @@ function cache_path($home=false) { //create cache path
   $path = str_replace('/','-',$path);
   return CACHE.$path.$mod_time.".html";
 }
-
+# Save stream output to file.
 function cache_output( $buffer ) {
     file_put_contents( cache_path(), $buffer );
     chmod(cache_path(), 0664);
@@ -17,9 +20,9 @@ function cache_output( $buffer ) {
     exit;
 }
 
-function splitConf($str) {
 # Separate configuration header from content
 # returns (parsed header [false if none], content)
+function splitConf($str) {
   $text = file_get_contents($str);
   $part = explode("\n\n",$text,2);
   $conf_line = explode("\n",$part[0]);
@@ -34,8 +37,8 @@ function splitConf($str) {
   return array($conf_array,$part[1]);
 }
 
-# Parse configutation string OR file into an array
-# (comments start with #)
+# Returns parsed configutation string OR file 
+# as an array. Lines starting with # are comments.
 function parseConf($conf, $file = false) {
   if($file) { $conf = file_get_contents($conf); }
   $conf_array = array();
@@ -55,8 +58,8 @@ function parseConf($conf, $file = false) {
   return $conf_array;
 }
 
-# Merge site conf with page conf
-# and process content with Markdown
+# Merge site conf with page conf and returns
+# marked-down content and mra array
 function munch($path, $mra) {
   if(!is_file($path)) {
     return array(
@@ -71,7 +74,7 @@ function munch($path, $mra) {
   return array($content, $mra);
 }
 
-# function mra() To use in template.
+# mra( key , string , string ) 
 # Returns a value from the mra array
 # with optional string wrapping
 function mra($key,$pre = "",$post = "") {
@@ -79,6 +82,9 @@ function mra($key,$pre = "",$post = "") {
   return !empty($mra[$key]) ? $pre.$mra[$key].$post : "";
 }
 
+# makeMenu( mra('title') , menu file )
+# Returns a HTML unordered list of links to the
+# pages in the menu file. False if only one entry,
 function makeMenu($cur = false, $conf = 'mra/menu.conf') {
   $menu_array = parseConf($conf, true);
 
@@ -93,7 +99,9 @@ function makeMenu($cur = false, $conf = 'mra/menu.conf') {
       $q = '/';
       $link_path = substr($path, 0, -3);
     }
-    $str .= '<li';
+    $str .= '<li'; 
+    # If current page title is in page list,
+    # mark it as currently selected.
     $str .= ($name == $cur )?  ' class="selected"': '';
     $str .= '><a href="';
     $str .= ($path != $homepage)?
@@ -115,7 +123,9 @@ function showRaw($file) {
   exit;
 }
 
-function sane($string) { // Name sanitizing function
+# String sanitizing function for 
+# file names, etc...
+function sane($string) { 
 	$string = strtolower(str_replace(" ", "_", $string));
 	$string = preg_replace('![^/a-z0-9_\-.]!', "", $string);
 	return $string;

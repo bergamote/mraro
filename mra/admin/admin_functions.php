@@ -73,6 +73,7 @@ function listPage($name, $path) {
     echo '  </li>'.PHP_EOL;
   }
 }
+
 # html unordered list for Category
 function listCategory($name, $dir, $path) {
   $path .= $name . DIRECTORY_SEPARATOR;
@@ -87,7 +88,8 @@ function listCategory($name, $dir, $path) {
   runArray($dir, $path);
   echo '  </ul>'.PHP_EOL;
 }
-# Add New
+
+# Add a new page
 function addNewPage($path) {
   global $addNewBit;
   echo '<li class="new" id="addNew_'.$addNewBit.'"
