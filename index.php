@@ -34,7 +34,7 @@ if(is_file(CONTENT.".sidebar.md")) {
 ## Check the query string:
 
 # If page is queried
-if(!empty($_GET['q']))  { 
+if(!empty($_GET['q'])) { 
   $full_path = CONTENT.urldecode($_GET['q']);
   # If page is already cached, show that,
   if( empty($mra['nocache']) && is_file(cache_path()) ){
@@ -85,7 +85,12 @@ if(!empty($_GET['q']))  {
   return $buffer;
   exit;
 }
+# If no template overide use index.php
+$template = "index.php";
+if(!empty($mra['template'])) {
+  $template = $mra['template'].".php";
+}
 
-# Process a normal page and cache it.
+# Process a normal page
 ob_start( 'cache_output' ); //start caching
-include(THEME.'index.php');
+include(THEME.$template);
