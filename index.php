@@ -26,7 +26,6 @@ $mra['theme_dir'] = "mra/theme/".mra('theme','','/');
 # Check if .sidebar.md is present and 
 # store it in mra[sidebar] if yes.
 if(is_file(CONTENT.".sidebar.md")) {
-  require_once('mra/lib/markdown.php');
   $sidebar = munch(CONTENT.".sidebar.md", $mra);
   $mra['sidebar'] = $sidebar[0];
 }
@@ -43,7 +42,6 @@ if(!empty($_GET['q'])) {
   }
   # otherwise prepare page as $content and $mra
   # (template + cache after conditional check).
-  require_once('mra/lib/markdown.php');
   $file = munch($full_path, $mra);
   $content = $file[0];
   $mra = $file[1];
@@ -73,7 +71,6 @@ if(!empty($_GET['q'])) {
   }
   # otherwise process the homepage and cache it.
   $home_cache = cache_path($homepage);
-  require_once('mra/lib/markdown.php');
   $file = munch(CONTENT.$homepage, $mra);
   $content = $file[0];
   $mra = $file[1];
