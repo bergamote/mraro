@@ -70,10 +70,10 @@ function munch($path, $mra) {
   if($file[0]) {
     $mra = array_merge($mra, $file[0]);
   }
-  #$content = Markdown($file[1]);
+  # Convert markdown file to html
   require_once('mra/lib/Parsedown.php');
   $parser = new Parsedown();
-  $my_html = $parser->text($file[1]);
+  $content = $parser->text($file[1]);
   return array($content, $mra);
 }
 
